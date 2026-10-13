@@ -1,0 +1,3014 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>XI PPLG 2 - Class Information Hub</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+  <style>
+    /* =========================================
+       STYLING DASAR & TEMA ABU-ABU SMK
+       ========================================= */
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      background-color: #e2e8f0; 
+      color: #1e293b;
+      min-height: 100vh;
+      padding-bottom: 60px;
+    }
+
+    /* Container Utama */
+    .container {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+
+
+/* =========================
+   HALAMAN FOTO KELAS
+========================= */
+
+#welcomeScreen {
+    position: fixed;
+    inset: 0;
+    z-index: 999999;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    overflow: hidden;
+
+    opacity: 1;
+    visibility: visible;
+}
+
+/* FOTO KELAS */
+#welcomeScreen::before {
+    content: "";
+    position: absolute;
+    inset: -15px;
+
+    background-image: url("foto-kelas.jpg");
+    background-size: cover;
+    background-position: center;
+
+    filter: blur(4px);
+
+    transform: scale(1.05);
+
+    z-index: -2;
+}
+
+/* LAPISAN GELAP */
+#welcomeScreen::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+
+    background: rgba(0, 0, 0, 0.45);
+
+    z-index: -1;
+}
+
+
+/* ISI TENGAH */
+
+.welcome-content {
+    text-align: center;
+    color: white;
+
+    position: relative;
+    z-index: 5;
+
+    animation: welcomeIn 0.8s ease;
+}
+
+.welcome-logo {
+    width: 90px;
+    height: 90px;
+
+    object-fit: cover;
+
+    border-radius: 50%;
+
+    border: 3px solid white;
+
+    margin-bottom: 15px;
+}
+
+.welcome-content h1 {
+    margin: 0;
+
+    font-size: 38px;
+    font-weight: 800;
+}
+
+.welcome-content p {
+    margin: 5px 0 25px;
+
+    font-size: 15px;
+
+    opacity: .9;
+}
+
+
+/* TOMBOL MASUK */
+
+.enter-btn {
+    border: none;
+
+    padding: 14px 28px;
+
+    border-radius: 50px;
+
+    background: white;
+
+    color: #111827;
+
+    font-weight: 800;
+
+    font-size: 15px;
+
+    cursor: pointer;
+
+    transition: .25s;
+}
+
+.enter-btn:hover {
+    transform: scale(1.05);
+}
+
+.enter-btn i {
+    margin-left: 8px;
+}
+
+
+/* ADMIN */
+
+/* ANIMASI */
+
+@keyframes welcomeIn {
+
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+}
+
+
+/* KELUAR */
+
+.welcome-hide {
+    animation: welcomeOut .6s ease forwards;
+}
+
+@keyframes welcomeOut {
+
+    to {
+        opacity: 0;
+        visibility: hidden;
+    }
+
+}
+
+    /* =========================================
+       HERO SECTION & FILTER CEPAT
+       ========================================= */
+    .hero {
+      background: linear-gradient(135deg, #334155, #0f172a); /* Dark Slate / Industrial Grey */
+      color: #ffffff;
+      padding: 60px 20px 80px;
+      text-align: center;
+      border-bottom-left-radius: 30px;
+      border-bottom-right-radius: 30px;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+      margin-bottom: 40px;
+    }
+
+     /* Kotak pembungkus logo */
+    .app-logo {
+      width: 90px;
+      height: 90px;
+      background: #0f172a;
+      border-radius: 50%; /* Bikin kotaknya jadi bulat sempurna */
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 20px;
+      overflow: hidden; /* INI KUNCINYA: Biar foto yang keluar jalur otomatis terpotong rapi */
+      border: 2px solid rgba(255, 255, 255, 0.2);
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+    }
+    
+      /* Foto di dalam logo */
+    .app-logo img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover; /* Biar fotonya pas memenuhi kotak bulat tanpa gepeng */
+    }
+
+    .hero h1 {
+      font-size: 2.5rem;
+      font-weight: 800;
+      letter-spacing: -1px;
+      margin-bottom: 8px;
+    }
+
+    .hero p {
+      color: #94a3b8;
+      font-size: 1.1rem;
+      margin-bottom: 30px;
+    }
+
+    /* Quick Filter Badges */
+    .quick-tags {
+      margin-top: 10px;
+      display: flex;
+      justify-content: center;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .tag-btn {
+      background: rgba(255, 255, 255, 0.1);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      color: #ffffff;
+      padding: 8px 16px;
+      border-radius: 20px;
+      font-size: 0.9rem;
+      cursor: pointer;
+      transition: 0.2s;
+    }
+
+
+    /* =========================================
+       CARDS & GRID KONTEN
+       ========================================= */
+    .card-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 25px;
+    }
+
+    .card {
+      background: #ffffff;
+      border-radius: 20px;
+      padding: 25px;
+      border: 1px solid #cbd5e1;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.03);
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .card:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 8px 25px rgba(0,0,0,0.08);
+    }
+
+    .card-header {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 20px;
+      padding-bottom: 12px;
+      border-bottom: 2px solid #f1f5f9;
+    }
+
+    .card-header i {
+      font-size: 1.4rem;
+      color: #475569;
+      background: #f1f5f9;
+      padding: 10px;
+      border-radius: 12px;
+    }
+
+    .card-header h2 {
+      font-size: 1.25rem;
+      color: #1e293b;
+      font-weight: 700;
+    }
+
+    /* Item List & Table Styling */
+    .info-list {
+      list-style: none;
+    }
+
+    .info-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 10px 0;
+      border-bottom: 1px dashed #e2e8f0;
+      font-size: 0.95rem;
+      border-bottom: 2px solid #cbd5e1;
+    }
+
+    .info-item:last-child {
+      border-bottom: none;
+    }
+
+    .badge {
+      background: #f1f5f9;
+      color: #334155;
+      padding: 4px 10px;
+      border-radius: 8px;
+      font-weight: 600;
+      font-size: 0.85rem;
+    }
+    
+
+    /* Table Khusus Jadwal */
+    .custom-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.9rem;
+    }
+
+    .custom-table th {
+      background: #475569;
+      color: white;
+      text-align: left;
+      padding: 10px;
+      border-radius: 6px;
+    }
+
+    .custom-table td {
+      padding: 10px;
+      border-bottom: 2px solid #cbd5e1;
+    }
+
+    /* Grid Pakaian 5 Hari */
+    .clothes-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(80px, 1fr));
+      gap: 10px;
+      text-align: center;
+    }
+
+    .clothes-item {
+      background: #f8fafc;
+      border: 1px solid #e2e8f0;
+      border-radius: 12px;
+      padding: 12px 6px;
+    }
+
+    .clothes-item .day {
+      font-weight: 700;
+      font-size: 0.8rem;
+      color: #64748b;
+      display: block;
+      margin-bottom: 5px;
+    }
+
+    .clothes-item i {
+      font-size: 1.5rem;
+      color: #334155;
+      margin: 5px 0;
+    }
+
+    .clothes-item .desc {
+      font-size: 0.75rem;
+      font-weight: 600;
+      color: #1e293b;
+    }
+
+    /* Stat Box (Absen) */
+    .stat-container {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 10px;
+      text-align: center;
+    }
+
+    .stat-box {
+      background: #f8fafc;
+      padding: 12px;
+      border-radius: 12px;
+      border: 1px solid #e2e8f0;
+    }
+
+    .stat-box .num {
+      font-size: 1.4rem;
+      font-weight: 800;
+      color: #1e293b;
+    }
+
+    .stat-box .lbl {
+      font-size: 0.75rem;
+      color: #64748b;
+      font-weight: 600;
+    }
+
+    .no-results {
+      grid-column: 1 / -1;
+      text-align: center;
+      padding: 40px;
+      color: #64748b;
+      display: none;
+    }
+
+    .reset-filter-container {
+      text-align: center;
+      margin-top: 15px;
+    }
+
+    .reset-btn {
+      background: none;
+      border: none;
+      color: #94a3b8;
+      font-size: 0.85rem;
+      cursor: pointer;
+      text-decoration: underline;
+    }
+
+    .reset-btn:hover {
+      color: #ffffff;
+    }
+    
+        /* CSS Tambahan untuk Tabel Jadwal Pelajaran Full */
+    .schedule-full-table {
+      margin-top: 15px;
+    }
+    
+    .schedule-full-table .custom-table th, 
+    .schedule-full-table .custom-table td {
+      padding: 12px 10px;
+      text-align: left;
+    }
+
+    .schedule-full-table .custom-table td:first-child {
+      font-weight: 700;
+      color: #334155;
+      width: 30%;
+    }
+    
+  /* =========================================
+   STRUKTUR KELAS - BIRU ABU
+   ========================================= */
+
+.org-chart {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 15px;
+  padding: 10px 0;
+}
+
+   .org-node {
+  background: #e2e8f0;
+  border: 1px solid #94a3b8;
+  border-radius: 14px;
+  padding: 12px 15px;
+  text-align: center;
+  width: 100%;
+  max-width: 280px;
+  box-shadow: 0 4px 10px rgba(15, 23, 42, 0.08);
+}
+
+ /* Wali Kelas */
+.org-node.root {
+  background:  #e2e8f0;
+  color: #ffffff;
+  border-color: #475569;
+  box-shadow: 0 6px 15px rgba(15, 23, 42, 0.18);
+}
+
+    .org-node.root .role,
+.org-node.root .name {
+  color: #ffffff;
+}
+
+/* Jabatan */
+.org-node .role {
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: #64748b;
+  text-transform: uppercase;
+  margin-bottom: 3px;
+}
+
+.org-node .name {
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: #1e293b;
+}
+
+/* Garis */
+.org-line {
+  width: 2px;
+  height: 18px;
+  background: #94a3b8;
+}
+
+/* Baris Ketua/Wakil/Sekretaris/Bendahara */
+.org-row {
+  display: flex;
+  gap: 12px;
+  width: 100%;
+  justify-content: center;
+}
+
+.org-row .org-node {
+  flex: 1;
+  max-width: 190px;
+}
+
+/* HP */
+@media (max-width: 600px) {
+  .org-row {
+    gap: 8px;
+  }
+
+  .org-row .org-node {
+    padding: 10px 8px;
+  }
+
+  .org-node .name {
+    font-size: 0.82rem;
+  }
+
+  .org-node .role {
+    font-size: 0.65rem;
+  }
+}
+
+
+
+    /* =========================
+       NAMA ORGANIGRAM KLIK FOTO
+       ========================= */
+
+    .org-person {
+      display: block;
+      width: 100%;
+
+      margin: 0;
+      padding: 0;
+
+      border: 0;
+      outline: none;
+      background: transparent;
+
+      font: inherit;
+      text-align: center;
+
+      color: #1e293b;
+      cursor: pointer;
+
+      -webkit-tap-highlight-color: transparent;
+      transition: color 0.2s ease, transform 0.2s ease;
+    }
+
+    .org-node.root .org-person {
+      color: #000000;
+    }
+
+    .org-person:hover {
+      color: #0f172a;
+      text-decoration: underline;
+    }
+
+    .org-person:active {
+      transform: scale(0.97);
+    }
+
+    /* MODAL FOTO */
+    .person-modal {
+      position: fixed;
+      inset: 0;
+      z-index: 99999;
+
+      display: none;
+      align-items: center;
+      justify-content: center;
+
+      padding: 20px;
+
+      background: rgba(15, 23, 42, 0.78);
+      backdrop-filter: blur(5px);
+    }
+
+    .person-modal.show {
+      display: flex;
+    }
+
+    .person-modal-box {
+      position: relative;
+
+      width: min(92vw, 360px);
+      max-height: 90vh;
+
+      padding: 18px;
+
+      overflow: auto;
+
+      background: #ffffff;
+      border-radius: 20px;
+
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+
+      text-align: center;
+    }
+
+    .person-modal-close {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  z-index: 5;
+
+  width: 40px;
+  height: 40px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border: 2px solid #ffffff;
+  border-radius: 50%;
+
+  background: rgba(15, 23, 42, 0.75);
+  color: #ffffff;
+
+  font-size: 18px;
+  cursor: pointer;
+
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.35);
+
+  -webkit-tap-highlight-color: transparent;
+}
+
+    .person-modal-image {
+      width: 100%;
+      height: auto;
+      aspect-ratio: 3 / 4;
+      max-height: 62vh;
+
+      display: block;
+
+      margin: 8px auto 15px;
+
+      border-radius: 14px;
+
+      object-fit: cover;
+      object-position: center top;
+      background: #e2e8f0;
+    }
+
+    .person-modal-name {
+      margin: 0 45px 4px;
+
+      color: #0f172a;
+
+      font-size: 1.1rem;
+      font-weight: 800;
+    }
+
+    .person-modal-hint {
+      color: #64748b;
+      font-size: 0.78rem;
+    }
+
+    .person-photo-missing {
+      width: 100%;
+      aspect-ratio: 3 / 4;
+      max-height: 62vh;
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      margin: 8px auto 15px;
+      padding: 30px;
+
+      border-radius: 14px;
+
+      background: #e2e8f0;
+      color: #64748b;
+
+      font-size: 0.85rem;
+      text-align: center;
+    }
+
+    @media (max-width: 600px) {
+      .person-modal {
+        padding: 12px;
+      }
+
+      .person-modal-box {
+        width: min(94vw, 360px);
+        padding: 14px;
+        border-radius: 18px;
+      }
+
+      .person-modal-image {
+        max-height: 58vh;
+      }
+
+      .person-modal-name {
+        font-size: 1rem;
+      }
+    }
+
+    /* Garis penghubung flowchart */
+    .org-line {
+      width: 2px;
+      height: 15px;
+      background: #cbd5e1;
+    }
+
+    .org-row {
+      display: flex;
+      gap: 10px;
+      width: 100%;
+      justify-content: center;
+    }
+
+    .org-row .org-node {
+      flex: 1;
+      max-width: 190px;
+    }
+    
+        /* CSS Splash Screen / Loading Awal 2 Detik */
+    #splash-screen {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100vh;
+      background: #0f172a; /* Warna gelap senada sama hero */
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      z-index: 9999;
+      transition: opacity 0.5s ease, visibility 0.5s ease;
+    }
+
+        /* Bingkai Bulat Logo di Loading */
+    .splash-logo {
+      width: 80px;
+      height: 80px;
+      background: linear-gradient(135deg, #64748b, #334155);
+      border-radius: 50%; /* Bikin jadi bulat sempurna */
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 36px;
+      color: #ffffff;
+      border: 2px solid rgba(255, 255, 255, 0.2);
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+      margin-bottom: 15px;
+      animation: pulseLogo 1s infinite alternate;
+      overflow: hidden; /* TAMBAHKAN INI: Biar gambar gak keluar jalur */
+    }
+
+    .splash-logo img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover; /* Biar fotonya pas di lingkaran */
+    }
+
+
+    /* Animasi berdenyut pelan biar estetik */
+    @keyframes pulseLogo {
+      from { transform: scale(1); }
+      to { transform: scale(1.05); }
+    }
+
+    .splash-title {
+      color: #ffffff;
+      font-size: 1.5rem;
+      font-weight: 800;
+      letter-spacing: -0.5px;
+    }
+
+    .splash-sub {
+      color: #94a3b8;
+      font-size: 0.9rem;
+      margin-top: 5px;
+    }
+
+
+    * { box-sizing: border-box; margin: 0; padding: 0; font-family: sans-serif; }
+    body { background: #e2e8f0; color: #1e293b; padding-bottom: 50px; }
+    .container { max-width: 900px; margin: 0 auto; padding: 0 15px; }
+
+    /* Navigasi */
+    .nav { background: #0f172a; padding: 15px; display: flex; justify-content: space-between; color: white; position: sticky; top: 0; z-index: 100; }
+    .nav button { background: #334155; border: none; color: white; padding: 8px 12px; border-radius: 6px; cursor: pointer; font-weight: bold; }
+
+    /* Halaman */
+    .page { display: none; padding-top: 20px; }
+    .page.active { display: block; }
+
+    /* Kartu & Grid */
+    .card { background: white; border-radius: 12px; padding: 20px; margin-bottom: 20px; box-shadow: 0 2px 8px rgba(0,0,0,0.05); }
+    .header-row { display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px; }
+    
+
+    /* Modal Form */
+    #modalForm { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); justify-content: center; align-items: center; z-index: 200; }
+    .modal-box { background: white; padding: 20px; border-radius: 10px; width: 90%; max-width: 400px; }
+    .modal-box input, .modal-box textarea { width: 100%; padding: 8px; margin-bottom: 10px; border: 1px solid #cbd5e1; border-radius: 6px; }
+
+/* ================================
+   MEDIA SOSIAL CARD
+   ================================ */
+
+.social-section {
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.social-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 14px;
+  width: 100%;
+}
+
+.social-card {
+  /* KOTAK CARD */
+  display: flex;
+  align-items: center;
+  gap: 12px;
+
+  width: 100%;
+  min-width: 0;
+  box-sizing: border-box;
+
+  padding: 14px;
+  border-radius: 14px;
+
+  background: #f8fafc;
+  border: 1px solid #cbd5e1;
+
+  text-decoration: none;
+  color: #0f172a;
+
+  transition: 0.25s ease;
+  overflow: hidden;
+}
+
+/* Efek saat disentuh/diklik */
+.social-card:hover {
+  transform: translateY(-3px);
+  background: #ffffff;
+  border-color: #94a3b8;
+  box-shadow: 0 6px 16px rgba(15, 23, 42, 0.10);
+}
+
+/* ICON */
+.social-icon {
+  width: 42px;
+  height: 42px;
+  min-width: 42px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 12px;
+  background: #e2e8f0;
+
+  font-size: 20px;
+}
+
+/* BAGIAN TEKS */
+.social-info {
+  flex: 1;
+  min-width: 0;
+  overflow: hidden;
+}
+
+.social-info h3 {
+  margin: 0 0 3px;
+  font-size: 0.9rem;
+  font-weight: 800;
+  color: #0f172a;
+}
+
+.social-info p {
+  margin: 0;
+  font-size: 0.75rem;
+  color: #64748b;
+
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* PANAH */
+.social-arrow {
+  flex-shrink: 0;
+  color: #64748b;
+}
+
+/* LAPTOP */
+@media (max-width: 900px) {
+  .social-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+/* HP */
+@media (max-width: 600px) {
+  .social-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+ /* =========================================
+   FOOTER / CREDIT PEMBUAT
+   ========================================= */
+
+.site-footer {
+  margin-top: 50px;
+  padding: 30px 20px;
+  text-align: center;
+  border-top: 1px solid #cbd5e1;
+  color: #64748b;
+}
+
+.footer-title {
+  font-size: 1rem;
+  font-weight: 800;
+  color: #334155;
+  margin-bottom: 6px;
+}
+
+.footer-credit {
+  font-size: 0.85rem;
+  margin-bottom: 5px;
+}
+
+.footer-credit strong {
+  color: #1e293b;
+}
+
+.footer-copy {
+  font-size: 0.75rem;
+  color: #94a3b8;
+}
+
+/* =================================
+   KLIK KARTU JADWAL PAKAIAN
+   ================================= */
+
+.clothes-item {
+  cursor: pointer;
+  transition: 0.25s ease;
+  overflow: hidden;
+}
+
+.clothes-item:hover {
+  transform: translateY(-2px);
+}
+
+/* Foto disembunyikan dulu */
+.clothes-item img.uniform-photo {
+    display: none;
+
+    width: min(100%, 450px);
+    height: auto;
+
+    max-height: none;
+
+    object-fit: contain;
+
+    margin: 25px auto 5px;
+
+    border-radius: 16px;
+
+    box-shadow:
+        0 20px 45px rgba(0, 0, 0, .28),
+        0 5px 15px rgba(0, 0, 0, .15);
+
+    animation: uniformPhotoIn .35s ease;
+}
+
+.clothes-item.uniform-active .uniform-photo {
+    display: block;
+}
+
+
+/* =========================
+   LOGO KIRI ATAS
+========================= */
+
+.class-logo {
+    position: fixed !important;
+    top: 15px !important;
+    left: 15px !important;
+
+    width: 50px !important;
+    height: 50px !important;
+
+    min-width: 50px !important;
+    min-height: 50px !important;
+    max-width: 50px !important;
+    max-height: 50px !important;
+
+    padding: 3px !important;
+
+    border: 2px solid #fff !important;
+    border-radius: 50% !important;
+
+    background: #334155 !important;
+
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+
+    overflow: hidden !important;
+
+    z-index: 99999 !important;
+
+    box-shadow: 0 4px 12px rgba(0,0,0,.25);
+}
+
+.class-logo img {
+    display: block !important;
+
+    width: 100% !important;
+    height: 100% !important;
+
+    min-width: 0 !important;
+    min-height: 0 !important;
+
+    max-width: 100% !important;
+    max-height: 100% !important;
+
+    object-fit: cover !important;
+    border-radius: 50% !important;
+}
+ 
+   /* Card */
+
+.uniform-card{
+    transition: 0.3s;
+    cursor: pointer;
+}
+
+/* Blur card lain */
+
+.uniform-card.blur {
+    filter: blur(4px);
+    opacity: 0.5;
+}
+
+/* Yang dipilih */
+
+.uniform-card.active {
+    filter: none;
+    transform: scale(1.05);
+
+    box-shadow:
+        0 15px 40px rgba(0,0,0,0.35);
+
+    z-index: 5;
+}
+
+/* Background hitam */
+
+.uniform-modal{
+    position: fixed;
+    inset: 0;
+
+    display: none;
+
+    justify-content: center;
+    align-items: center;
+
+    background: rgba(0,0,0,0.7);
+
+    backdrop-filter: blur(8px);
+
+    z-index: 9999;
+}
+
+.uniform-modal.show{
+    display: flex;
+}
+
+/* Kotak foto */
+
+.uniform-popup{
+    position: relative;
+
+    max-width: 90%;
+    max-height: 90%;
+
+    animation: pop 0.3s ease;
+}
+
+.uniform-popup img{
+    width: 100%;
+    max-width: 500px;
+
+    border-radius: 20px;
+
+    box-shadow:
+        0 20px 60px rgba(0,0,0,0.5);
+}
+
+/* Tombol X */
+
+.close-uniform{
+    position: absolute;
+
+    top: -15px;
+    right: -15px;
+
+    width: 40px;
+    height: 40px;
+
+    border: none;
+    border-radius: 50%;
+
+    background: white;
+
+    cursor: pointer;
+}
+
+@keyframes pop{
+    from{
+        transform: scale(0.8);
+        opacity: 0;
+    }
+
+    to{
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+ /* =========================
+   SERAGAM
+========================= */
+
+.clothes-item {
+    position: relative;
+    cursor: pointer;
+    transition: 0.3s ease;
+    z-index: 1;
+}
+
+/* FOTO SERAGAM */
+.uniform-photo {
+    display: none;
+
+    width: 100%;
+    max-width: 280px;
+    max-height: 320px;
+
+    object-fit: contain;
+
+    margin: 15px auto 5px;
+
+    border-radius: 16px;
+
+    box-shadow:
+        0 15px 35px rgba(0, 0, 0, 0.30);
+
+    animation: uniformPhotoIn 0.3s ease;
+}
+
+/* Saat dibuka */
+.clothes-item.uniform-open .uniform-photo {
+    display: block;
+}
+
+/* Item yang sedang dipilih */
+.clothes-item.uniform-open {
+    position: relative;
+
+    z-index: 10;
+
+    transform: scale(1.03);
+
+    box-shadow:
+        0 18px 45px rgba(0, 0, 0, 0.30);
+}
+
+/* Item lain jadi blur */
+.clothes-item.uniform-blur {
+    filter: blur(4px);
+    opacity: 0.45;
+
+    transform: scale(0.98);
+
+    pointer-events: none;
+}
+
+/* Animasi foto */
+@keyframes uniformPhotoIn {
+    from {
+        opacity: 0;
+        transform: scale(0.85);
+    }
+
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+/* =================================
+   JADWAL PAKAIAN - FOCUS MODE
+================================= */
+
+.clothes-item {
+    position: relative;
+    cursor: pointer;
+    transition: 
+        opacity .3s ease,
+        filter .3s ease,
+        transform .3s ease,
+        box-shadow .3s ease;
+}
+
+/* FOTO SERAGAM */
+.uniform-photo {
+    display: none;
+    width: min(100%, 450px);
+    max-height: 380px;
+
+    object-fit: cover;
+
+    margin: 25px auto 5px;
+
+    border-radius: 16px;
+
+    box-shadow:
+        0 20px 45px rgba(0, 0, 0, .28),
+        0 5px 15px rgba(0, 0, 0, .15);
+
+    animation: uniformPhotoIn .35s ease;
+}
+
+/* ITEM YANG DIPILIH */
+.clothes-item.uniform-active {
+    z-index: 10;
+
+    background: #f8fafc;
+
+    transform: scale(1.015);
+
+    box-shadow:
+        0 15px 35px rgba(15, 23, 42, .18);
+}
+
+/* FOTO ITEM AKTIF */
+.clothes-item.uniform-active .uniform-photo {
+    display: block;
+}
+
+/* ITEM LAIN DIBUAT BLUR */
+.clothes-item.uniform-blur {
+    filter: blur(4px);
+    opacity: .45;
+
+    transform: scale(.98);
+}
+
+/* ANIMASI FOTO */
+@keyframes uniformPhotoIn {
+    from {
+        opacity: 0;
+        transform: scale(.92) translateY(10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: scale(1) translateY(0);
+    }
+}
+
+/* HP */
+@media (max-width: 600px) {
+
+    .uniform-photo {
+        width: 100%;
+        max-height: 330px;
+        border-radius: 15px;
+    }
+
+    .clothes-item.uniform-active {
+        transform: none;
+    }
+
+    .clothes-item.uniform-blur {
+        filter: blur(3px);
+    }
+}
+
+ /* =========================
+   LOGO KIRI ATAS - RAPiH
+========================= */
+
+.class-logo {
+    position: fixed !important;
+    top: 15px !important;
+    left: 15px !important;
+
+    width: 50px !important;
+    height: 50px !important;
+
+    padding: 0 !important;
+
+    border: 2px solid #fff !important;
+    border-radius: 50% !important;
+
+    background: #334155 !important;
+
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+
+    overflow: hidden !important;
+
+    box-sizing: border-box !important;
+
+    z-index: 999999 !important;
+
+    box-shadow: 0 4px 12px rgba(0,0,0,.25);
+}
+
+.class-logo img {
+    display: block !important;
+
+    width: 100% !important;
+    height: 100% !important;
+
+    max-width: none !important;
+    max-height: none !important;
+
+    margin: 0 !important;
+    padding: 0 !important;
+
+    object-fit: cover !important;
+
+    border-radius: 50% !important;
+}
+
+/* =========================
+   QUICK FILTER — WHITE ELEGANT
+========================= */
+
+.quick-tags {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    gap: 12px;
+}
+
+
+
+.tag-btn {
+    padding: 10px 22px;
+    border-radius: 30px;
+    border: 1px solid rgba(255,255,255,0.25);
+    background: rgba(255,255,255,0.10);
+    color: white;
+    font-size: 20px;
+    text-decoration: none;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 7px;
+}
+/* Tombol aktif */
+.tag-btn.active {
+    background: rgba(255, 255, 255, 0.94) !important;
+
+    color: #1e293b !important;
+
+    border: 1px solid rgba(255, 255, 255, 0.95) !important;
+
+    box-shadow:
+        0 8px 24px rgba(0, 0, 0, 0.14),
+        0 1px 4px rgba(255, 255, 255, 0.6);
+
+    transform: translateY(-2px);
+
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+}
+
+/* Hover */
+.tag-btn:hover {
+    background: rgba(255, 255, 255, 0.22);
+    border-color: rgba(255, 255, 255, 0.6);
+}
+
+/* Saat ditekan */
+.tag-btn:active {
+    transform: scale(.96);
+}
+
+/* Tombol filter dirapikan: ukuran seragam, rata tengah */
+.quick-tags {
+    max-width: 680px;
+    margin: 0 auto;
+    gap: 10px;
+}
+
+.quick-tags .tag-btn {
+    flex: 1 1 calc(50% - 10px);
+    min-height: 46px;
+    padding: 10px 14px;
+    font-family: inherit;
+    font-size: 15px;
+    font-weight: 600;
+    line-height: 1.2;
+    text-align: center;
+    white-space: nowrap;
+}
+
+@media (min-width: 640px) {
+    .quick-tags {
+        max-width: 760px;
+        gap: 12px;
+    }
+
+    .quick-tags .tag-btn {
+        flex: 0 1 auto;
+        min-width: 150px;
+        padding: 11px 22px;
+        font-size: 16px;
+    }
+}
+
+@media (max-width: 340px) {
+    .quick-tags .tag-btn {
+        flex-basis: 100%;
+    }
+}
+
+.class-info {
+    width: 90%;
+    max-width: 500px;
+    margin: 0 auto 22px;
+    padding: 18px 20px;
+    background: #ffffff;
+    border-radius: 18px;
+    text-align: center;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.12);
+
+    /* animasi */
+    opacity: 0;
+    transform: translateY(25px);
+    animation: classInfoShow 0.8s ease forwards;
+}
+
+.class-title {
+    font-size: 22px;
+    font-weight: 800;
+    color: #0f172a;
+    margin-bottom: 5px;
+}
+
+.class-desc {
+    font-size: 14px;
+    color: #64748b;
+    line-height: 1.4;
+}
+
+@keyframes classInfoShow {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+#secretTrigger,
+#secretTrigger * {
+    -webkit-tap-highlight-color: transparent !important;
+    -webkit-touch-callout: none;
+    user-select: none;
+    outline: none !important;
+}
+
+#secretTrigger:focus,
+#secretTrigger:active,
+#secretTrigger:focus-visible,
+#secretTrigger *:focus,
+#secretTrigger *:active {
+    outline: none !important;
+    box-shadow: none !important;
+}
+
+.piket-header {
+  display: grid;
+  grid-template-columns: 30% 70%;
+  background: #475569;
+  color: white;
+  font-weight: 700;
+  padding: 12px 10px;
+  border-radius: 8px;
+  margin-top: 15px;
+}
+
+.piket-header span:first-child {
+  padding-left: 6px;
+}
+
+.piket-header span:last-child {
+  padding-left: 10px;
+}
+
+.scroll-reveal {
+  opacity: 0;
+  transform: translateY(50px);
+  transition:
+    opacity 0.6s ease,
+    transform 0.6s ease;
+}
+
+.scroll-reveal.show {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.scroll-reveal.from-left {
+  transform: translateX(-60px);
+}
+
+.scroll-reveal.from-left.show {
+  transform: translateX(0);
+}
+
+.scroll-reveal.from-right {
+  transform: translateX(60px);
+}
+
+.scroll-reveal.from-right.show {
+  transform: translateX(0);
+}
+
+  
+/* ===== SCROLL REVEAL PREMIUM ===== */
+.scroll-reveal{opacity:0;transform:translateY(55px) scale(.97);filter:blur(5px);transition:opacity .75s ease,transform .75s cubic-bezier(.2,.8,.2,1),filter .75s ease;will-change:transform,opacity,filter}
+.scroll-reveal.show{opacity:1;transform:translateY(0) scale(1);filter:blur(0)}
+.scroll-reveal.from-left{transform:translateX(-55px) scale(.97)}
+.scroll-reveal.from-right{transform:translateX(55px) scale(.97)}
+.scroll-reveal.from-left.show,.scroll-reveal.from-right.show{transform:translateX(0) scale(1)}
+.scroll-reveal.pop{transform:translateY(25px) scale(.88)}
+.scroll-reveal.pop.show{transform:translateY(0) scale(1)}
+@media(prefers-reduced-motion:reduce){.scroll-reveal{opacity:1;transform:none;filter:none;transition:none}}
+#secretTrigger{cursor:pointer;user-select:none;}
+
+/* FIX DATA SISWA: tinggi sekitar setengah layar */
+.data-siswa, .data-siswa-card, #dataSiswa, #data-siswa {
+  max-height: 50vh !important;
+  overflow-y: auto;
+}
+
+
+/* Anti geser horizontal (elemen scroll-reveal yang digeser translateX bikin halaman melebar) */
+html,body{overflow-x:hidden;overflow-x:clip;max-width:100%;overscroll-behavior-x:none}
+body{position:relative}
+/* Barudak Cuy popup */
+.bc-link{cursor:pointer;text-decoration:underline;text-underline-offset:3px;background:none;border:none;padding:0;font:inherit;font-weight:700;color:inherit}
+.bc-ov{position:fixed;inset:0;background:rgba(0,0,0,.5);display:none;align-items:center;justify-content:center;padding:16px;z-index:99999;overscroll-behavior:contain;overflow:hidden}
+.bc-ov.on{display:flex}
+.bc-modal{background:#f3f4f6;border:1px solid #9ca3af;border-radius:8px;max-width:min(620px,100%);width:100%;max-height:90vh;overflow:auto;padding:20px;position:relative;color:#1f2937;margin:auto;min-width:0}
+.bc-modal h2{margin:0 0 4px;font-size:1.25rem;font-weight:700;padding-right:36px}
+.bc-sub{margin:0 0 16px;font-size:.88rem;color:#6b7280}
+.bc-x{position:absolute;top:12px;right:12px;width:30px;height:30px;border-radius:4px;background:#e5e7eb;border:1px solid #9ca3af;font-size:1.1rem;line-height:1;cursor:pointer;color:#374151}
+.bc-x:hover{background:#d1d5db}
+.bc-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.bc-box{background:#fff;border:1px solid #9ca3af;border-radius:6px;padding:14px;text-align:left}
+.bc-box h3{margin:0 0 8px;padding-bottom:6px;border-bottom:1px solid #d1d5db;font-size:.95rem;font-weight:700;color:#374151}
+.bc-box p{margin:0;font-size:.92rem;line-height:1.55;color:#374151}
+.bc-mem{display:flex;flex-direction:column;gap:2px}
+.bc-m{display:flex;align-items:center;gap:8px;width:100%;background:none;border:none;border-radius:4px;padding:6px 6px;font:inherit;font-size:.92rem;color:#1f2937;text-align:left;cursor:pointer}
+.bc-m:hover{background:#e5e7eb}
+.bc-av{min-width:20px;color:#6b7280;font-size:.85rem}
+.bc-view{text-align:center}
+.bc-view[hidden]{display:none}
+.bc-back{background:#e5e7eb;border:1px solid #9ca3af;border-radius:4px;padding:6px 12px;font:inherit;font-size:.88rem;cursor:pointer;color:#374151;float:left}
+.bc-back:hover{background:#d1d5db}
+.bc-photo{clear:both;width:min(250px,70%);aspect-ratio:3/4;margin:12px auto;border:1px solid #9ca3af;border-radius:4px;overflow:hidden;background:#d1d5db;display:flex;align-items:center;justify-content:center;color:#4b5563;text-align:center}
+.bc-photo img{width:100%;height:100%;object-fit:cover;display:block}
+.bc-ph{padding:14px;font-size:.82rem;line-height:1.45}
+.bc-ph b{display:block;font-size:2.6rem;font-weight:700;margin-bottom:6px;color:#6b7280}
+.bc-nm{font-size:1.15rem;font-weight:700;margin-bottom:10px}
+.bc-nav{display:flex;align-items:center;justify-content:center;gap:16px;color:#6b7280;font-size:.88rem}
+.bc-nav button{width:36px;height:36px;border-radius:4px;border:1px solid #9ca3af;background:#e5e7eb;color:#374151;font-size:1.3rem;line-height:1;cursor:pointer}
+.bc-nav button:hover{background:#d1d5db}
+@media(max-width:480px){.bc-grid{grid-template-columns:1fr}}
+html.bc-lock{overflow:hidden!important}
+body.bc-lock{position:fixed!important;left:0;right:0;width:100%!important;overflow:hidden!important}
+
+/* =========================================
+   WARNA BIRU LAUT (cuma warna, layout tetap)
+   ========================================= */
+body { background: #dce8f0; color: #1b2b3a; }
+
+/* Hero, nav, splash: polos tanpa gradasi */
+.hero { background: #0c2d48; }
+.hero p { color: #a9c6dd; }
+.app-logo { background: #0c2d48; border-color: rgba(255,255,255,.25); }
+.nav { background: #0c2d48; }
+.nav button { background: #145da0; }
+#splash-screen { background: #0c2d48; }
+.splash-logo { background: #145da0; }
+.splash-sub { color: #a9c6dd; }
+.class-logo { background: #145da0 !important; }
+.reset-btn { color: #a9c6dd; }
+
+/* Tombol filter di hero */
+.tag-btn.active { color: #0c2d48 !important; }
+
+/* Kartu */
+.card { border-color: #b6cde0; }
+.card-header { border-bottom-color: #dbe8f2; }
+.card-header i { background: #d6e6f2; color: #145da0; }
+.card-header h2 { color: #0c2d48; }
+.info-item { border-bottom-color: #c3d6e6; }
+.badge { background: #d6e6f2; color: #0c2d48; }
+.wa-number { color: #145da0; }
+
+/* Tabel jadwal & header piket */
+.custom-table th, .piket-header { background: #145da0; }
+.custom-table td { border-bottom-color: #c3d6e6; }
+.schedule-full-table .custom-table td:first-child { color: #0c2d48; }
+
+/* Seragam & statistik */
+.clothes-item { background: #eef4f9; border-color: #c3d6e6; }
+.clothes-item .day { color: #4a6a85; }
+.clothes-item i { color: #145da0; }
+.clothes-item .desc { color: #0c2d48; }
+.clothes-item.uniform-active { background: #eef4f9; }
+.stat-box { background: #eef4f9; border-color: #c3d6e6; }
+.stat-box .num { color: #0c2d48; }
+.stat-box .lbl { color: #4a6a85; }
+
+/* Organigram (teks wali kelas sebelumnya putih di atas abu terang, jadi gak kebaca) */
+.org-node { background: #dbe9f4; border-color: #8fb3d1; }
+.org-node .role { color: #4a6a85; }
+.org-node .name, .org-person { color: #0c2d48; }
+.org-node.root { background: #145da0; border-color: #0c2d48; }
+.org-node.root .role, .org-node.root .name, .org-node.root .org-person { color: #ffffff; }
+.org-person:hover { color: #145da0; }
+.org-node.root .org-person:hover { color: #ffffff; }
+.org-line { background: #8fb3d1; }
+
+/* Media sosial */
+.social-card { background: #eef4f9; border-color: #c3d6e6; color: #0c2d48; }
+.social-card:hover { background: #ffffff; border-color: #145da0; }
+.social-icon { background: #d6e6f2; color: #145da0; }
+.social-info h3 { color: #0c2d48; }
+.social-info p, .social-arrow { color: #4a6a85; }
+
+/* Info kelas */
+.class-title { color: #0c2d48; }
+.class-desc { color: #4a6a85; }
+
+/* Footer */
+.site-footer { border-top-color: #b6cde0; color: #4a6a85; }
+.footer-title { color: #0c2d48; }
+.footer-credit strong { color: #0c2d48; }
+.footer-copy { color: #7f9bb3; }
+.bc-link { color: #145da0; }
+
+/* Popup foto organigram */
+.person-modal { background: rgba(12, 45, 72, .78); }
+.person-modal-close { background: rgba(12, 45, 72, .8); }
+.person-modal-name { color: #0c2d48; }
+.person-modal-hint { color: #4a6a85; }
+.person-modal-image, .person-photo-missing { background: #dbe9f4; }
+
+/* Popup Barudak Cuy */
+.bc-modal { background: #eef4f9; border-color: #8fb3d1; color: #1b2b3a; }
+.bc-modal h2 { color: #0c2d48; }
+.bc-sub { color: #4a6a85; }
+.bc-x, .bc-back, .bc-nav button { background: #d6e6f2; border-color: #8fb3d1; color: #0c2d48; }
+.bc-x:hover, .bc-back:hover, .bc-nav button:hover { background: #bcd4e8; }
+.bc-box { border-color: #b6cde0; }
+.bc-box h3 { color: #145da0; border-bottom-color: #c3d6e6; }
+.bc-box p, .bc-m { color: #1b2b3a; }
+.bc-m:hover { background: #d6e6f2; }
+.bc-av, .bc-nav { color: #4a6a85; }
+.bc-photo { border-color: #8fb3d1; background: #dbe9f4; }
+
+/* Popup Barudak Cuy: biru lebih tegas */
+.bc-ov { background: rgba(12, 45, 72, .65); }
+.bc-modal { background: #e3eef7; border: 2px solid #145da0; }
+.bc-modal h2 { color: #0c2d48; }
+.bc-sub { color: #3d6283; }
+.bc-x { background: #145da0; border-color: #0c2d48; color: #ffffff; }
+.bc-x:hover { background: #0c2d48; }
+.bc-box { background: #ffffff; border: 1px solid #8fb3d1; border-top: 4px solid #145da0; }
+.bc-box h3 { color: #0c2d48; border-bottom: 1px solid #b6cde0; }
+.bc-box p { color: #1b2b3a; }
+.bc-av { color: #145da0; font-weight: 700; }
+.bc-m:hover { background: #d6e6f2; }
+.bc-back, .bc-nav button { background: #145da0; border-color: #0c2d48; color: #ffffff; }
+.bc-back:hover, .bc-nav button:hover { background: #0c2d48; }
+.bc-nm { color: #0c2d48; }
+.bc-photo { border: 2px solid #145da0; background: #cfe0ee; }
+.bc-ph b { color: #145da0; }
+
+/* Latar dibalikin abu-abu, biru cuma buat aksen (judul, tombol, header tabel) */
+body { background: #e2e8f0; }
+.card-header i { background: #e2e8f0; }
+.badge { background: #e2e8f0; }
+.clothes-item, .clothes-item.uniform-active, .stat-box { background: #f1f5f9; border-color: #cbd5e1; }
+.org-node { background: #e2e8f0; border-color: #94a3b8; }
+.org-line { background: #94a3b8; }
+.social-card { background: #f1f5f9; border-color: #cbd5e1; }
+.social-card:hover { background: #ffffff; }
+.social-icon { background: #e2e8f0; }
+.person-modal { background: rgba(15, 23, 42, .78); }
+.person-modal-image, .person-photo-missing { background: #e2e8f0; }
+.bc-ov { background: rgba(0, 0, 0, .5); }
+.bc-modal { background: #f3f4f6; }
+.bc-m:hover { background: #e5e7eb; }
+.bc-photo { background: #d1d5db; }
+
+/* Hero & layar loading jadi abu-abu */
+.hero { background: #3b4656; }
+.hero p { color: #cbd5e1; }
+.app-logo { background: #2d3644; }
+.nav { background: #2d3644; }
+.nav button { background: #475569; }
+#splash-screen { background: #2d3644; }
+.splash-logo { background: #475569; }
+.splash-sub { color: #cbd5e1; }
+.reset-btn { color: #cbd5e1; }
+.tag-btn.active { color: #1e293b !important; }
+
+/* =========================================
+   ORGANIGRAM - BARUDAK CUY
+   ========================================= */
+
+/* ---------- Urutan kartu di popup ----------
+   Tentang | Motto
+   Anggota (penuh)
+   Info Lain (penuh) */
+.bc-grid .bc-box:nth-child(1) { order: 1; }                         /* Tentang */
+.bc-grid .bc-box:nth-child(3) { order: 2; }                         /* Motto */
+.bc-grid .bc-box:nth-child(2) { order: 3; grid-column: 1 / -1; }    /* Anggota */
+.bc-grid .bc-box:nth-child(4) { order: 4; grid-column: 1 / -1; }    /* Info Lain */
+
+/* ---------- Warna (ganti di sini aja) ---------- */
+.bc-mem.bc-org {
+  --org-line: #145da0;   /* garis penghubung */
+  --org-dark: #0c2d48;   /* teks & border gelap */
+  --org-soft: #d6e6f2;   /* lingkaran inisial */
+  --org-edge: #8fb3d1;   /* border kotak */
+  --org-sub:  #3d6283;   /* teks jabatan */
+}
+
+/* ---------- Wadah piramida ---------- */
+.bc-mem.bc-org {
+  flex-direction: column;
+  align-items: center;
+  gap: 22px;
+  padding: 6px 0 2px;
+}
+
+.bc-row {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  width: 100%;
+}
+
+/* ---------- Garis penghubung ---------- */
+/* garis turun dari level atas ke level bawah */
+.bc-row + .bc-row::before {
+  content: "";
+  position: absolute;
+  top: -22px;
+  left: 50%;
+  width: 2px;
+  height: 22px;
+  background: var(--org-line);
+  transform: translateX(-1px);
+}
+
+/* garis datar di atas baris terakhir (4 orang) */
+.bc-row.bc-wide::after {
+  content: "";
+  position: absolute;
+  top: -11px;
+  left: 12.5%;
+  right: 12.5%;
+  height: 2px;
+  background: var(--org-line);
+}
+
+/* garis kecil turun ke tiap orang di baris terakhir */
+.bc-row.bc-wide .bc-n::before {
+  content: "";
+  position: absolute;
+  top: -11px;
+  left: 50%;
+  width: 2px;
+  height: 11px;
+  background: var(--org-line);
+  transform: translateX(-1px);
+}
+
+/* ---------- Kotak orang ---------- */
+.bc-n {
+  position: relative;
+  flex: 1 1 0;
+  min-width: 0;
+  max-width: 92px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+  padding: 8px 4px;
+  background: #fff;
+  border: 1px solid var(--org-edge);
+  border-radius: 8px;
+  font: inherit;
+  color: var(--org-dark);
+  cursor: pointer;
+  transition: transform .15s, box-shadow .15s;
+}
+
+.bc-n:hover,
+.bc-n:focus-visible {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 10px rgba(20, 93, 160, .25);
+  background: #fff;
+  outline: none;
+}
+
+/* lingkaran inisial */
+.bc-n i {
+  display: grid;
+  place-items: center;
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  background: var(--org-soft);
+  color: var(--org-line);
+  font-style: normal;
+  font-weight: 700;
+}
+
+/* nama */
+.bc-n b {
+  max-width: 100%;
+  font-size: .82rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* jabatan */
+.bc-n small {
+  font-size: .7rem;
+  line-height: 1.2;
+  text-align: center;
+  color: var(--org-sub);
+}
+
+/* ---------- Ketua (puncak piramida) ---------- */
+.bc-n.bc-top {
+  max-width: 112px;
+  background: var(--org-line);
+  border-color: var(--org-dark);
+  color: #fff;
+}
+
+.bc-n.bc-top:hover { background: var(--org-line); }
+
+.bc-n.bc-top i {
+  width: 46px;
+  height: 46px;
+  background: #fff;
+  font-size: 1.1rem;
+}
+
+.bc-n.bc-top small { color: #d6e6f7; }
+</style>
+</head>
+<body>
+     <div class="class-logo">
+  <img src="logoK.jpg">
+</div>
+
+  <section class="hero">
+    <div class="container">
+      <div class="app-logo">
+        <img src="logo.jpg"></i>
+      </div>
+      
+      <h1>XI PPLG 2</h1>
+
+<!-- QUICK FILTER -->
+<div class="quick-tags" id="quickTags">
+
+    <button
+        type="button"
+        class="tag-btn"
+        onclick="quickSearch('Wali Kelas', this)">
+        Wali Kelas
+    </button>
+
+    <button
+        type="button"
+        class="tag-btn"
+        onclick="quickSearch('Organigram', this)">
+        Organigram
+    </button>
+
+    <button
+        type="button"
+        class="tag-btn"
+        onclick="quickSearch('Jadwal Pelajaran', this)">
+        Jadwal Pelajaran
+    </button>
+
+    <button
+        type="button"
+        class="tag-btn"
+        onclick="quickSearch('Piket Kebersihan', this)">
+        Piket Kebersihan
+    </button>
+
+    <button
+        type="button"
+        class="tag-btn"
+        onclick="quickSearch('Seragam', this)">
+        Seragam
+    </button>
+    
+        <button
+        type="button"
+        class="tag-btn"
+        onclick="quickSearch('Media sosial', this)">
+        Media sosial
+    </button>
+
+    <a href="gallery.html" class="tag-btn">
+        <i class="fa-solid fa-images"></i>
+        Galeri Kelas
+    </a>
+
+</div>
+
+<div class="reset-filter-container" id="resetContainer" style="display: none;">
+  <button class="reset-btn" onclick="resetFilter()">Tampilkan Semua Data</button>
+</div>
+      
+      <div class="reset-filter-container" id="resetContainer" style="display: none;">
+        <button class="reset-btn" onclick="resetFilter()">Tampilkan Semua Data</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- Keterangan Kelas -->
+<div class="class-info">
+    <div class="class-title">XI PPLG 2</div>
+    <div class="class-desc">Pengembangan Perangkat Lunak</div>
+    <div class="class-desc">dan Gim</div>
+</div>
+  
+      <div class="card">
+  <div class="card-header">
+    <i class="fa-solid fa-users"></i>
+    <h2>Data Siswa</h2>
+  </div>
+
+  <div class="stat-container">
+
+    <div class="stat-box">
+      <div class="num">41</div>
+      <div class="lbl">Jumlah Siswa</div>
+    </div>
+
+    <div class="stat-box">
+      <div class="num">18</div>
+      <div class="lbl">Siswa Laki-laki</div>
+    </div>
+
+    <div class="stat-box">
+      <div class="num">21</div>
+      <div class="lbl">Siswa Perempuan</div>
+    </div>
+
+  </div>
+</div>
+
+  <main class="container">
+    <div class="card-grid" id="cardGrid">
+
+      <div class="card" data-keywords="wali kelas guru pengajar wali">
+        <div class="card-header">
+          <i class="fa-solid fa-user-tie"></i>
+          <h2>Wali Kelas</h2>
+        </div>
+        <ul class="info-list">
+          <li class="info-item">
+            <span>Nama Guru</span>
+            <span class="badge">Leny oktaviani</span>
+          </li>
+          </li>
+         <li class="info-item">
+          <span>Kontak / WA</span>
+
+           <a href="https://wa.me/6285693422565"
+              class="wa-number">
+              0812-3456-7890
+           </a>
+</li>
+          <li class="info-item">
+            <span>Mata Pelajaran</span>
+            <span>Bahasa Indonesia</span>
+          </li>
+          </li>
+        </ul>
+      </div>
+      
+      <!-- =========================================
+     MEDIA SOSIAL KELAS
+     ========================================= -->
+
+<div class="card"  data-keywords="Media sosial instagram tiktok spotify">
+  <div class="card-header"  
+    <i class="fa-solid fa-share-nodes"></i>
+    <h2>Media Sosial</h2>
+  </div>
+
+  <p class="social-intro">
+    Temukan aktivitas, cerita, dan kenangan XI PPLG 2
+    melalui media sosial kelas.
+  </p>
+
+  <div class="social-grid">
+
+    <!-- INSTAGRAM -->
+    <a href="https://www.instagram.com/warriorclass_ofsmk4lppm?igsi=dDA2MGRlb2Z4dDR4"
+       target="_blank"
+       class="social-card">
+
+      <div class="social-icon">
+        <i class="fa-brands fa-instagram"></i>
+      </div>
+
+      <div class="social-info">
+        <h3>Instagram</h3>
+        <p>@XI-PPLG-2</p>
+      </div>
+
+      <i class="fa-solid fa-chevron-right social-arrow"></i>
+
+    </a>
+
+
+    <!-- TIKTOK -->
+    <a href="https://www.tiktok.com/@xpplg2_lppmri?_r=1&_t=ZS-994J8AHt21f"
+       target="_blank"
+       class="social-card">
+
+      <div class="social-icon">
+        <i class="fa-brands fa-tiktok"></i>
+      </div>
+
+      <div class="social-info">
+        <h3>TikTok 10</h3>
+        <p>@xpplg2_lppmri</p>
+      </div>
+
+      <i class="fa-solid fa-chevron-right social-arrow"></i>
+
+    </a>
+
+
+    <!-- SPOTIFY -->
+    <a href="https://open.spotify.com/playlist/5av6uUXRbYs8BwNrI3U69D?si=a0aaa06db023478c"
+       target="_blank"
+       class="social-card">
+
+      <div class="social-icon">
+        <i class="fa-brands fa-spotify"></i>
+      </div>
+
+      <div class="social-info">
+        <h3>Spotify</h3>
+        <p>Playlist XI PPLG 2</p>
+      </div>
+
+      <i class="fa-solid fa-chevron-right social-arrow"></i>
+
+    </a>
+
+   </div>
+  </div>
+</div>
+
+      <div class="card" data-keywords="jadwal pakaian baju seragam senin selasa rabu kamis jumat">
+        <div class="card-header">
+          <i class="fa-solid fa-shirt"></i>
+          <h2>Jadwal Pakaian (5 Hari)</h2>
+        </div>
+        <div class="clothes-item" onclick="toggleUniform(this)">
+           <span class="day">SENIN</span>
+              <i class="fa-solid fa-shirt"></i>
+           <span class="desc">Putih Abu</span>
+             <img class="uniform-photo" src="seragamsenin.jpg" alt="Seragam Senin">
+        </div>
+          <div class="clothes-item" onclick="toggleUniform(this)">
+            <span class="day">SELASA</span>
+            <i class="fa-solid fa-shirt"></i>
+            <span class="desc">Seragam Khusus</span>
+            
+            <img class="uniform-photo" src="seragamSelasa.jpg" alt="Seragam Senin">
+          </div>
+           <div class="clothes-item" onclick="toggleUniform(this)">
+            <span class="day">RABU</span>
+            <i class="fa-solid fa-shirt"></i>
+            <span class="desc">Produktif</span>
+            <img class="uniform-photo" src="seragamrabu.jpg" alt="Seragam Senin">
+          </div>
+           <div class="clothes-item" onclick="toggleUniform(this)">
+            <span class="day">KAMIS</span>
+            <i class="fa-solid fa-shirt"></i>
+            <span class="desc">Batik SMK</span>
+            <img class="uniform-photo" src="seragamKamis.jpg" alt="Seragam Senin">
+          </div>
+           <div class="clothes-item" onclick="toggleUniform(this)">
+            <span class="day">JUMAT</span>
+            <i class="fa-solid fa-shirt"></i>
+            <span class="desc">Baju Muslim</span>
+            <img class="uniform-photo" src="seragamjumat.jpg" alt="Seragam jumat">
+          </div>
+        </div>
+      </div>
+
+      <div class="card" data-keywords="organigram struktur ketua wakil sekretaris bendahara pengurus">
+        <div class="card-header">
+          <i class="fa-solid fa-sitemap"></i>
+          <h2>Struktur Organigram 19</h2>
+        </div>
+        
+        <div class="org-chart">
+          <!-- Level 1: Wali Kelas -->
+          <div class="org-node root">
+            <div class="role">Wali Kelas</div>
+
+            <button
+              type="button"
+              class="name org-person"
+              data-name="Leny octaviani"
+              data-photo="foto-organigram/leny.jpg"
+            >
+              Leny octaviani
+            </button>
+          </div>
+
+          <div class="org-line"></div>
+
+          <!-- Level 2: Ketua & Wakil -->
+          <div class="org-row">
+            <div class="org-node">
+              <div class="role">Ketua Kelas</div>
+
+              <button
+                type="button"
+                class="name org-person"
+                data-name="M. Daffa Atmadeva"
+                data-photo="foto-organigram/daffa.jpg"
+              >
+                M. Daffa Atmadeva
+              </button>
+            </div>
+
+            <div class="org-node">
+              <div class="role">Wakil Ketua</div>
+
+              <button
+                type="button"
+                class="name org-person"
+                data-name="Vivih Riyanti"
+                data-photo="foto-organigram/vivih.jpg"
+              >
+                Vivih Riyanti
+              </button>
+            </div>
+          </div>
+
+          <div class="org-line"></div>
+
+          <!-- Level 3: Sekretaris -->
+          <div class="org-row">
+            <div class="org-node">
+              <div class="role">Sekretaris 1</div>
+
+              <button
+                type="button"
+                class="name org-person"
+                data-name="Dewini"
+                data-photo="foto-organigram/dewini.jpg"
+              >
+                Dewini
+              </button>
+            </div>
+
+            <div class="org-node">
+              <div class="role">Sekretaris 2</div>
+
+              <button
+                type="button"
+                class="name org-person"
+                data-name="Windi lisdinar"
+                data-photo="foto-organigram/windi.jpg"
+              >
+                Windi lisdinar
+              </button>
+            </div>
+          </div>
+
+          <div class="org-line"></div>
+
+          <!-- Level 4: Bendahara -->
+          <div class="org-row">
+            <div class="org-node">
+              <div class="role">Bendahara 1</div>
+
+              <button
+                type="button"
+                class="name org-person"
+                data-name="Azizah Tunnafsyah"
+                data-photo="foto-organigram/azizah.jpg"
+              >
+                Azizah Tunnafsyah
+              </button>
+            </div>
+
+            <div class="org-node">
+              <div class="role">Bendahara 2</div>
+
+              <button
+                type="button"
+                class="name org-person"
+                data-name="Nabil Azmi R."
+                data-photo="foto-organigram/nabil.jpg"
+              >
+                Nabil Azmi R.
+              </button>
+            </div>
+          </div>
+          <div class="org-line"></div>
+
+          <!-- Level 5: Absensi -->
+          <div class="org-row">
+            <div class="org-node">
+              <div class="role">Absensi 1</div>
+
+              <button
+                type="button"
+                class="name org-person"
+                data-name="Alexa zeo"
+                data-photo="foto-organigram/alexa.jpg"
+              >
+                Alexa zeo
+              </button>
+            </div>
+
+            <div class="org-node">
+              <div class="role">Absensi 2</div>
+
+              <button
+                type="button"
+                class="name org-person"
+                data-name="Syakira"
+                data-photo="foto-organigram/syakira.jpg"
+              >
+                Syakira
+              </button>
+            </div>
+          </div>
+
+          <div class="org-line"></div>
+
+          <!-- Level 6: Kebersihan -->
+          <div class="org-row">
+            <div class="org-node">
+              <div class="role">Kebersihan 1</div>
+
+              <button
+                type="button"
+                class="name org-person"
+                data-name="Farhan"
+                data-photo="foto-organigram/farhan.jpg"
+              >
+                Farhan
+              </button>
+            </div>
+
+            <div class="org-node">
+              <div class="role">Kebersihan 2</div>
+
+              <button
+                type="button"
+                class="name org-person"
+                data-name="Adit"
+                data-photo="foto-organigram/adit.jpg"
+              >
+                Adit
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+      <div class="card" data-keywords="piket kebersihan kebersihan senin selasa rabu kamis jumat">
+        <div class="card-header">
+          <i class="fa-solid fa-broom"></i>
+          <h2>Jadwal Piket Kebersihan</h2>
+        </div>
+        <div class="piket-header">
+           <span>Hari</span>
+          <span>Nama Siswa</span>
+           </div>
+        <ul class="info-list">
+          <li class="info-item">
+            <span class="badge">Senin</span>
+            <span>Intan, Aditya, Zahra, Siti, Syakira, Adel, Ilham, Vivih, Riri</span>
+          </li>
+          <li class="info-item">
+            <span class="badge">Selasa</span>
+            <span>Zaki, Mutia, Sintia, Alexa, Musemil, Daffa, Windi, Farhan</span>
+          </li>
+          <li class="info-item">
+            <span class="badge">Rabu</span>
+            <span>Dewi, Agasha, Reyhan, Maiza, Sanchia, Aprizal, Rafi, Arfan</span>
+          </li>
+          <li class="info-item">
+            <span class="badge">Kamis</span>
+            <span>Barran, Khisam, Lutfi, Chintya, Nabil, Fasha, Kamila, Lidia</span>
+          </li>
+          <li class="info-item">
+            <span class="badge">Jumat</span>
+            <span>Dewini, Maulana, Rama, Aulia, Satria, Azizah, Syifa, April</span>
+          </li>
+        </ul>
+      </div>
+
+      <div class="card" data-keywords="jadwal pelajaran mapel materi jam belajar senin selasa rabu kamis jumat">
+        <div class="card-header">
+          <i class="fa-solid fa-calendar-days"></i>
+          <h2>Jadwal Pelajaran</h2>
+        </div>
+        <div class="schedule-full-table">
+          <table class="custom-table">
+            <thead>
+              <tr>
+                <th>Hari</th>
+                <th>Mata Pelajaran</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Senin</td>
+                <td>Pendidikan Agama / Pancasila / PPL</td>
+              </tr>
+              <tr>
+                <td>Selasa</td>
+                <td>Basis Data / PJOK / Sejarah</td>
+              </tr>
+              <tr>
+                <td>Rabu</td>
+                <td>Pemrograman Web / UI/UX / Seni Budaya</td>
+              </tr>
+              <tr>
+                <td>Kamis</td>
+                <td>Bahasa Inggris / Matematika / PKWU</td>
+              </tr>
+              <tr>
+                <td>Jumat</td>
+                <td>Bahasa Indonesia / Informatika / BK</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+
+    <div class="no-results" id="noResults">
+      <i class="fa-solid fa-circle-xmark" style="font-size: 3rem; margin-bottom: 10px;"></i>
+      <p>Data tidak ditemukan.</p>
+    </div>
+  </main>
+  
+    <!-- SPLASH SCREEN / LOADING AWAL -->
+  <div id="splash-screen">
+    <div class="splash-logo">
+      <img src="logo.jpg"></i> <!-- Bisa diganti ikon -->
+    </div>
+    <div class="splash-title">XI PPLG 2</div>
+    <div class="splash-sub">Welcome To Our class</div>
+  </div>
+  
+  
+      <footer class="site-footer">
+
+  <div class="footer-title">
+    XI PPLG 2
+  </div>
+
+  <div class="footer-credit">
+    Dibuat & dikembangkan oleh
+    <button class="bc-link" id="bcOpen">BARUDAK CUY</button>
+  </div>
+
+  <div class="footer-copy">
+    © 2026 XI PPLG 2 • Class Information Hub
+  </div>
+
+</footer>
+
+<div class="bc-ov" id="bcOv">
+  <div class="bc-modal" role="dialog" aria-modal="true">
+    <button class="bc-x" id="bcClose" aria-label="Tutup">&times;</button>
+    <h2>Siapa sih Barudak Cuy?</h2>
+    <p class="bc-sub">Tim yang bikin website kelas ini</p>
+    <div class="bc-grid">
+      <div class="bc-box"><h3>Tentang</h3><p>Barudak Cuy adalah tim 6 orang pembuat website kelas XI PPLG 2.</p></div>
+      <div class="bc-box"><h3>Anggota</h3><div class="bc-mem" id="bcMem"></div></div>
+      <div class="bc-box"><h3>Motto</h3><p>"Tulis motto Di sini"</p></div>
+      <div class="bc-box"><h3>Info Lain</h3><p>Dibentuk: tahun 2025<br>Kelas: XI PPLG 2<br>Proyek: Class Information Hub</p></div>
+    </div>
+    <div class="bc-view" id="bcView" hidden>
+      <button class="bc-back" id="bcBack">&larr; Kembali</button>
+      <div class="bc-photo" id="bcPhoto"></div>
+      <div class="bc-nm" id="bcNm"></div>
+      <div class="bc-nav"><button id="bcPrev" aria-label="Sebelumnya">&#8249;</button><span id="bcCnt"></span><button id="bcNext" aria-label="Berikutnya">&#8250;</button></div>
+    </div>
+  </div>
+</div>
+<script>
+(function(){
+  /* ====== EDIT Foto cuy====== */
+  var members=[
+    {nama:'M. Daffa atmadeva',foto:'barudak/1.jpg'},
+    {nama:'Parhan fadhlurahman',foto:'barudak/2.jpg'},
+    {nama:'Satria Fajril ',foto:'barudak/3.jpg'},
+    {nama:'Arfan ardiansah',foto:'barudak/4.jpg'},
+    {nama:'Ilham fajar',foto:'barudak/5.jpg'},
+    {nama:'Agasha arfarizki',foto:'barudak/6.jpg'}
+  ];
+  var ov=document.getElementById('bcOv'),sx=0,sy=0,html=document.documentElement,body=document.body;
+  var grid=ov.querySelector('.bc-grid'),sub=ov.querySelector('.bc-sub'),view=document.getElementById('bcView'),cur=0;
+  var mem=document.getElementById('bcMem');
+  /* Struktur piramida: idx = urutan di array members di atas */
+  var tree=[
+    [{i:0,peran:'Ketua',top:1}],
+    [{i:1,peran:'Wakil Ketua'}],
+    [{i:2,peran:'Konsep'},{i:3,peran:'Referensi'},{i:5,peran:'Referensi'},{i:4,peran:'Editing'}]
+  ];
+  mem.classList.add('bc-org');
+  tree.forEach(function(lv,li){
+    var row=document.createElement('div');
+    row.className='bc-row'+(li===2?' bc-wide':'');
+    lv.forEach(function(n){
+      var m=members[n.i],b=document.createElement('button');
+      b.type='button';b.className='bc-n'+(n.top?' bc-top':'');
+      b.innerHTML='<i>'+m.nama.trim().charAt(0).toUpperCase()+'</i>';
+      var nm=document.createElement('b');nm.textContent=m.nama.trim().split(' ')[m.nama.indexOf('M. ')===0?1:0];
+      var sm=document.createElement('small');sm.textContent=n.peran;
+      b.appendChild(nm);b.appendChild(sm);
+      b.onclick=function(){show(n.i)};
+      row.appendChild(b);
+    });
+    mem.appendChild(row);
+  });
+  function show(i){
+    cur=(i+members.length)%members.length;var m=members[cur];
+    var ph=document.getElementById('bcPhoto');ph.innerHTML='';
+    var img=new Image();img.alt=m.nama;
+    img.onerror=function(){ph.innerHTML='<div class="bc-ph"><b>'+m.nama.charAt(0).toUpperCase()+'</b>Foto belum ada.<br>Taruh di<br>'+m.foto+'</div>'};
+    img.src=m.foto;ph.appendChild(img);
+    document.getElementById('bcNm').textContent=m.nama;
+    document.getElementById('bcCnt').textContent=(cur+1)+' / '+members.length;
+    grid.style.display='none';sub.style.display='none';view.hidden=false;
+  }
+  function back(){view.hidden=true;grid.style.display='';sub.style.display=''}
+  document.getElementById('bcBack').onclick=back;
+  document.getElementById('bcPrev').onclick=function(){show(cur-1)};
+  document.getElementById('bcNext').onclick=function(){show(cur+1)};
+  function openM(e){
+    if(e)e.preventDefault();
+    sx=window.pageXOffset;sy=window.pageYOffset;
+    body.style.top=(-sy)+'px';body.style.left=(-sx)+'px';
+    html.classList.add('bc-lock');body.classList.add('bc-lock');
+    back();ov.classList.add('on');
+  }
+  function closeM(){
+    ov.classList.remove('on');
+    html.classList.remove('bc-lock');body.classList.remove('bc-lock');
+    body.style.top='';body.style.left='';
+    window.scrollTo(sx,sy);
+  }
+  var btn=document.getElementById('bcOpen');
+  btn.addEventListener('mousedown',function(e){e.preventDefault()});
+  btn.addEventListener('click',openM);
+  document.getElementById('bcClose').onclick=closeM;
+  ov.onclick=function(e){if(e.target===ov)closeM()};
+  document.addEventListener('keydown',function(e){
+    if(!ov.classList.contains('on'))return;
+    if(e.key==='Escape')closeM();
+    if(!view.hidden&&e.key==='ArrowLeft')show(cur-1);
+    if(!view.hidden&&e.key==='ArrowRight')show(cur+1);
+  });
+})();
+</script>
+
+  <div id="uniformModal" class="uniform-modal">
+
+    <div class="uniform-popup">
+
+        <button class="close-uniform" onclick="closeUniform()">
+            ✕
+        </button>
+
+        <img id="uniformPreview" src="">
+
+    </div>
+
+</div>
+  
+
+
+  <script>
+    // Fungsi untuk memfilter kartu berdasarkan tombol kategori yang diklik
+    function quickSearch(keyword, button) {
+
+    const cards = document.querySelectorAll(".card");
+
+    // =========================
+    // TOMBOL AKTIF
+    // =========================
+
+    document.querySelectorAll(".tag-btn").forEach(btn => {
+        btn.classList.remove("active");
+    });
+
+    button.classList.add("active");
+
+
+    // =========================
+    // FILTER CARD
+    // =========================
+
+    cards.forEach(card => {
+
+        const data =
+            (card.getAttribute("data-keywords") || "")
+            .toLowerCase();
+
+        const target =
+            keyword.toLowerCase();
+
+
+        // Cari keyword secara utuh
+        const words = data.split(/\s+/);
+
+        const targetWords = target.split(/\s+/);
+
+        const cocok = targetWords.every(word =>
+            words.includes(word)
+        );
+
+
+        if (cocok) {
+            card.style.display = "";
+        } else {
+            card.style.display = "none";
+        }
+
+    });
+
+
+
+      // Tampilkan tombol reset
+      resetContainer.style.display = 'block';
+    }
+
+    // Fungsi untuk mereset tampilan agar semua card muncul kembali
+    function resetFilter() {
+      const cards = document.querySelectorAll('.card');
+      const noResults = document.getElementById('noResults');
+      const resetContainer = document.getElementById('resetContainer');
+      const buttons = document.querySelectorAll('.tag-btn');
+
+      cards.forEach(card => {
+        card.style.display = 'block';
+      });
+
+      buttons.forEach(btn => btn.classList.remove('active'));
+      noResults.style.display = 'none';
+      resetContainer.style.display = 'none';
+    }
+ 
+        // Fungsi untuk menghilangkan Splash Screen setelah 2 detik
+    window.addEventListener('DOMContentLoaded', () => {
+      setTimeout(() => {
+        const splash = document.getElementById('splash-screen');
+        splash.style.opacity = '0';
+        splash.style.visibility = 'hidden';
+        
+        // Hapus elemen dari memori setelah animasinya selesai (0.5 detik)
+        setTimeout(() => {
+          splash.style.display = 'none';
+        }, 500);
+        
+      }, 2000); // Angka 2000 = 2000 milidetik = 2 detik
+    });
+
+     function pindah(id) {
+      document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+      document.getElementById('page-' + id).classList.add('active');
+    }
+
+  
+
+    window.onload = muatData;
+
+    function simpanData(e) {
+      e.preventDefault();
+      let file = document.getElementById('gambar').files[0];
+      let reader = new FileReader();
+      
+      reader.onload = function(event) {
+        let dataBaru = {
+          topik: document.getElementById('topik').value,
+          gambar: event.target.result,
+          balasan: document.getElementById('balasan').value
+        };
+
+        let list = JSON.parse(localStorage.getItem('dataSS')) || [];
+        list.unshift(dataBaru);
+        localStorage.setItem('dataSS', JSON.stringify(list));
+
+        tutupModal();
+        e.target.reset();
+        muatData();
+      };
+      reader.readAsDataURL(file);
+    }
+
+    function muatData() {
+      let container = document.getElementById('galeriContainer');
+      let list = JSON.parse(localStorage.getItem('dataSS')) || [];
+
+      if(list.length === 0) {
+        container.innerHTML = `<p style="color: #64748b; font-size: 0.9rem;">Belum ada tanggapan.</p>`;
+        return;
+      }
+
+      let html = "";
+      list.forEach(item => {
+        html += `
+          <div class="ss-item">
+            <img src="logo.jpg" alt="SS">
+            <div class="ss-body">
+              <b>${item.topik}</b>
+              <div class="admin-reply"><b>Admin:</b> ${item.balasan}</div>
+            </div>
+          </div>
+        `;
+      });
+      container.innerHTML = html;
+    }
+
+    function bukaModal() { 
+      document.getElementById('modalForm').style.display = 'flex'; 
+    }
+    
+    function tutupModal() { 
+      document.getElementById('modalForm').style.display = 'none'; 
+    }
+    
+        function muatData() {
+      let container = document.getElementById('galeriContainer');
+      let list = JSON.parse(localStorage.getItem('dataSS')) || [];
+
+      if(list.length === 0) {
+        container.innerHTML = `<p style="color: #64748b; font-size: 0.9rem;">Belum ada tanggapan.</p>`;
+        return;
+      }
+
+      let html = "";
+      list.forEach((item, index) => {
+        html += `
+          <div class="ss-item">
+            <img src="logo.jpg" alt="SS">
+            <div class="ss-body">
+              <b>${item.topik}</b>
+              <div class="admin-reply"><b>Admin:</b> ${item.balasan}</div>
+            </div>
+          </div>
+        `;
+      });
+      container.innerHTML = html;
+    }
+
+    // Fungsi untuk menghapus data berdasarkan urutan (index)
+    function hapusData(index) {
+      let pass = prompt("Masukkan Password Admin untuk menghapus:");
+      if (pass === "hapus11") { // Sesuaikan password admin lu di sini
+        let list = JSON.parse(localStorage.getItem('dataSS')) || [];
+        list.splice(index, 1); // Hapus data sesuai urutannya
+        localStorage.setItem('dataSS', JSON.stringify(list));
+        
+      }
+    }
+
+
+
+  </script>
+  <script type="module">
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/12.17.1/firebase-app.js";
+  import {
+    getFirestore
+  } from "https://www.gstatic.com/firebasejs/12.17.1/firebase-firestore.js";
+
+  const firebaseConfig = {
+    apiKey: "AIzaSyDv5-...YOUR_CONFIG...",
+    authDomain: "my-first-website-2f725.firebaseapp.com",
+    projectId: "my-first-website-2f725",
+    storageBucket: "my-first-website-2f725.firebasestorage.app",
+    messagingSenderId: "214771375520",
+    appId: "1:214771375520:web:fb4f92df7074ee1c7ed8c5",
+    measurementId: "G-MTFMM4TMKV"
+  };
+
+  const app = initializeApp(firebaseConfig);
+  const db = getFirestore(app);
+
+  console.log("🔥 Firebase berhasil terhubung!");
+  
+  function startWebsite() {
+  const welcome = document.getElementById("welcomeScreen");
+  const splash = document.getElementById("splashScreen");
+
+  // Hilangkan halaman foto kelas
+  welcome.classList.add("welcome-hide");
+
+  setTimeout(() => {
+    welcome.style.display = "none";
+
+    // Tampilkan splash
+    splash.style.display = "flex";
+
+    // Splash 3 detik
+    setTimeout(() => {
+      splash.style.opacity = "0";
+
+      setTimeout(() => {
+        splash.style.display = "none";
+      }, 500);
+
+    }, 3000);
+
+  }, 600);
+}
+
+</script>
+<script>
+function toggleUniform(item) {
+
+    const allItems =
+        document.querySelectorAll(".clothes-item");
+
+    // Kalau item ini sedang terbuka → tutup semuanya
+    if (item.classList.contains("uniform-open")) {
+
+        allItems.forEach(el => {
+            el.classList.remove("uniform-open");
+            el.classList.remove("uniform-blur");
+        });
+
+        return;
+    }
+
+    // Tutup/reset semuanya dulu
+    allItems.forEach(el => {
+        el.classList.remove("uniform-open");
+        el.classList.remove("uniform-blur");
+    });
+
+    // Buka yang diklik
+    item.classList.add("uniform-open");
+
+    // Blur yang lain
+    allItems.forEach(el => {
+
+        if (el !== item) {
+            el.classList.add("uniform-blur");
+        }
+
+    });
+}
+</script>
+
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+
+  const items = document.querySelectorAll(
+    ".card, .schedule-full-table, .org-chart, .stat-container, .ss-gallery-section, .clothes-item"
+  );
+
+  items.forEach((el, i) => {
+    el.classList.add("scroll-reveal");
+
+    if (i % 4 === 1) {
+      el.classList.add("from-left");
+    } 
+    else if (i % 4 === 3) {
+      el.classList.add("from-right");
+    }
+  });
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+
+      if (entry.isIntersecting) {
+        // Masuk layar → muncul
+        entry.target.classList.add("show");
+
+      } else {
+        // Keluar layar → hilang lagi
+        entry.target.classList.remove("show");
+      }
+
+    });
+  }, {
+    threshold: 0.15
+  });
+
+  items.forEach(el => observer.observe(el));
+
+});
+</script>
+<script src="admin.js"></script>
+
+<!-- =========================
+     MODAL FOTO ORGANIGRAM
+     ========================= -->
+<div
+  class="person-modal"
+  id="personModal"
+  aria-hidden="true"
+>
+  <div
+    class="person-modal-box"
+    role="dialog"
+    aria-modal="true"
+    aria-labelledby="personModalName"
+    onclick="event.stopPropagation()"
+  >
+    <button
+      type="button"
+      class="person-modal-close"
+      id="personModalClose"
+      aria-label="Tutup foto"
+    >
+      <i class="fa-solid fa-xmark"></i>
+    </button>
+
+    <img
+      id="personModalImage"
+      class="person-modal-image"
+      src=""
+      alt=""
+    >
+
+    <div
+      id="personPhotoMissing"
+      class="person-photo-missing"
+      style="display: none;"
+    >
+      Foto orang ini belum ditambahkan.
+    </div>
+
+    <div
+      id="personModalName"
+      class="person-modal-name"
+    ></div>
+
+    <div class="person-modal-hint">
+      Klik Tombol X untuk menutup
+    </div>
+  </div>
+</div>
+
+
+<script>
+/* =========================
+   FOTO ORGANIGRAM
+   ========================= */
+
+(function () {
+  const modal = document.getElementById("personModal");
+  const modalBox = modal?.querySelector(".person-modal-box");
+  const modalImage = document.getElementById("personModalImage");
+  const modalName = document.getElementById("personModalName");
+  const missing = document.getElementById("personPhotoMissing");
+  const closeButton = document.getElementById("personModalClose");
+
+  const people = document.querySelectorAll(".org-person");
+
+  if (!modal || !modalBox || !modalImage || !modalName || !missing) {
+    return;
+  }
+
+  function openPersonPhoto(button) {
+    const name = button.dataset.name || button.textContent.trim();
+    const photo = button.dataset.photo || "";
+
+    modalName.textContent = name;
+
+    modalImage.style.display = "block";
+    missing.style.display = "none";
+
+    modalImage.alt = "Foto " + name;
+
+    if (photo) {
+      modalImage.src = photo;
+    } else {
+      modalImage.removeAttribute("src");
+      modalImage.style.display = "none";
+      missing.style.display = "flex";
+    }
+
+    modal.classList.add("show");
+    modal.setAttribute("aria-hidden", "false");
+    document.body.classList.add("person-modal-open");
+  }
+
+  function closePersonPhoto() {
+    modal.classList.remove("show");
+    modal.setAttribute("aria-hidden", "true");
+    modalImage.removeAttribute("src");
+    document.body.classList.remove("person-modal-open");
+  }
+
+  people.forEach(function (button) {
+    button.addEventListener("click", function () {
+      openPersonPhoto(button);
+    });
+
+    button.addEventListener("keydown", function (event) {
+      if (event.key === "Enter" || event.key === " ") {
+        event.preventDefault();
+        openPersonPhoto(button);
+      }
+    });
+  });
+
+  modalImage.addEventListener("error", function () {
+    modalImage.style.display = "none";
+    missing.style.display = "flex";
+  });
+
+  closeButton?.addEventListener("click", closePersonPhoto);
+
+  modal.addEventListener("click", function () {
+    closePersonPhoto();
+  });
+
+  document.addEventListener("keydown", function (event) {
+    if (event.key === "Escape" && modal.classList.contains("show")) {
+      closePersonPhoto();
+    }
+  });
+})();
+</script>
+
+</body>
+</html>
