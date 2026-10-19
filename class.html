@@ -1,0 +1,2032 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Class Information Hub XI PPLG 2: wali kelas, organigram, jadwal pelajaran, piket, seragam, dan media sosial kelas.">
+  <title>XI PPLG 2 - Class Information Hub</title>
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+  <style>
+    /* XI PPLG 2 - Class Information Hub
+       Ganti warna tema lewat variabel di :root (bagian DASAR). */
+
+    /* ==========================================================
+       DASAR
+       ========================================================== */
+
+    :root {
+      --navy: #0c2d48;        /* biru tua: judul, header tabel, teks utama */
+      --blue: #145da0;        /* biru aksen: ikon, tombol, link */
+      --blue-muted: #4a6a85;  /* teks sekunder */
+      --blue-edge: #8fb3d1;   /* border popup & organigram */
+      --blue-line: #b6cde0;   /* border kartu */
+      --blue-soft: #c3d6e6;   /* garis pemisah */
+      --ink: #1b2b3a;         /* warna teks dasar */
+      --slate-100: #f1f5f9;   /* latar kotak kecil */
+      --slate-200: #e2e8f0;   /* latar halaman */
+      --slate-300: #cbd5e1;   /* border abu */
+      --hero: #3b4656;        /* latar hero */
+      --hero-dark: #2d3644;   /* latar splash & logo */
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: sans-serif;
+    }
+
+    body {
+      min-height: 100vh;
+      padding-bottom: 50px;
+      overflow-x: hidden;
+      overflow-x: clip;
+      max-width: 100%;
+      overscroll-behavior-x: none;
+      position: relative;
+      color: var(--ink);
+      background: var(--slate-200);
+    }
+
+    .container {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 0 15px;
+    }
+
+    html {
+      overflow-x: hidden;
+      overflow-x: clip;
+      max-width: 100%;
+      overscroll-behavior-x: none;
+    }
+
+    html.bc-lock {
+      overflow: hidden!important;
+    }
+
+    body.bc-lock {
+      position: fixed!important;
+      left: 0;
+      right: 0;
+      width: 100%!important;
+      overflow: hidden!important;
+    }
+
+
+    /* ==========================================================
+       HERO, LOGO & TOMBOL FILTER
+       ========================================================== */
+
+    .hero {
+      color: #ffffff;
+      padding: 60px 20px 80px;
+      text-align: center;
+      border-bottom-left-radius: 30px;
+      border-bottom-right-radius: 30px;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+      margin-bottom: 40px;
+      background: var(--hero);
+    }
+
+    .app-logo {
+      width: 90px;
+      height: 90px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 20px;
+      overflow: hidden;
+      border: 2px solid rgba(255, 255, 255, 0.2);
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+      border-color: rgba(255, 255, 255, .25);
+      background: var(--hero-dark);
+    }
+
+    .app-logo img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .hero h1 {
+      font-size: 2.5rem;
+      font-weight: 800;
+      letter-spacing: -1px;
+      margin-bottom: 8px;
+    }
+
+    .quick-tags {
+      margin-top: 10px;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      align-items: center;
+      max-width: 680px;
+      margin: 0 auto;
+      gap: 10px;
+    }
+
+    .tag-btn {
+      transition: 0.2s;
+      padding: 10px 22px;
+      border-radius: 30px;
+      border: 1px solid rgba(255, 255, 255, 0.25);
+      background: rgba(255, 255, 255, 0.10);
+      color: white;
+      font-size: 20px;
+      text-decoration: none;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 7px;
+    }
+
+    .reset-filter-container {
+      text-align: center;
+      margin-top: 15px;
+      display: flex;
+      justify-content: center;
+      margin: 16px auto 0;
+    }
+
+    .class-logo {
+      min-width: 50px !important;
+      min-height: 50px !important;
+      max-width: 50px !important;
+      max-height: 50px !important;
+      position: fixed !important;
+      top: 15px !important;
+      left: 15px !important;
+      width: 50px !important;
+      height: 50px !important;
+      padding: 0 !important;
+      border: 2px solid #fff !important;
+      border-radius: 50% !important;
+      display: flex !important;
+      align-items: center !important;
+      justify-content: center !important;
+      overflow: hidden !important;
+      box-sizing: border-box !important;
+      z-index: 999999 !important;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, .25);
+      background: var(--blue) !important;
+    }
+
+    .class-logo img {
+      min-width: 0 !important;
+      min-height: 0 !important;
+      display: block !important;
+      width: 100% !important;
+      height: 100% !important;
+      max-width: none !important;
+      max-height: none !important;
+      margin: 0 !important;
+      padding: 0 !important;
+      object-fit: cover !important;
+      border-radius: 50% !important;
+    }
+
+    .tag-btn.active {
+      background: rgba(255, 255, 255, 0.94) !important;
+      border: 1px solid rgba(255, 255, 255, 0.95) !important;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.14), 0 1px 4px rgba(255, 255, 255, 0.6);
+      transform: translateY(-2px);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      color: #1e293b !important;
+    }
+
+    .tag-btn:hover {
+      background: rgba(255, 255, 255, 0.22);
+      border-color: rgba(255, 255, 255, 0.6);
+    }
+
+    .tag-btn:active {
+      transform: scale(.96);
+    }
+
+    .quick-tags .tag-btn {
+      flex: 1 1 calc(50% - 10px);
+      min-height: 46px;
+      padding: 10px 14px;
+      font-family: inherit;
+      font-size: 15px;
+      font-weight: 600;
+      line-height: 1.2;
+      text-align: center;
+      white-space: nowrap;
+    }
+
+    .class-info {
+      width: 90%;
+      max-width: 500px;
+      margin: 0 auto 22px;
+      padding: 18px 20px;
+      background: #ffffff;
+      border-radius: 18px;
+      text-align: center;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.12);
+      opacity: 0;
+      transform: translateY(25px);
+      animation: classInfoShow 0.8s ease forwards;
+    }
+
+    .class-title {
+      font-size: 22px;
+      font-weight: 800;
+      margin-bottom: 5px;
+      color: var(--navy);
+    }
+
+    .class-desc {
+      font-size: 14px;
+      line-height: 1.4;
+      color: var(--blue-muted);
+    }
+
+    .reset-filter-container[hidden] {
+      display: none;
+    }
+
+    .return-home-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 9px;
+      min-height: 42px;
+      padding: 10px 18px;
+      border: 1px solid rgba(255, 255, 255, .38);
+      border-radius: 999px;
+      background: rgba(255, 255, 255, .14);
+      color: #fff;
+      font: inherit;
+      font-size: .9rem;
+      font-weight: 700;
+      cursor: pointer;
+      box-shadow: 0 5px 16px rgba(0, 0, 0, .12);
+      transition: background .2s ease, transform .2s ease;
+    }
+
+    .return-home-btn:hover {
+      background: rgba(255, 255, 255, .25);
+      transform: translateY(-1px);
+    }
+
+    .return-home-btn:active {
+      transform: scale(.97);
+    }
+
+    .return-home-btn i {
+      font-size: .95rem;
+    }
+
+    @keyframes classInfoShow {
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @media (min-width: 640px) {
+      .quick-tags {
+        max-width: 760px;
+        gap: 12px;
+      }
+
+      .quick-tags .tag-btn {
+        flex: 0 1 auto;
+        min-width: 150px;
+        padding: 11px 22px;
+        font-size: 16px;
+      }
+    }
+
+    @media (max-width: 340px) {
+      .quick-tags .tag-btn {
+        flex-basis: 100%;
+      }
+    }
+
+    @media(max-width:480px) {
+      .return-home-btn {
+        min-height: 40px;
+        padding: 9px 15px;
+        font-size: .84rem;
+      }
+    }
+
+
+    /* ==========================================================
+       SPLASH SCREEN
+       ========================================================== */
+
+    #splash-screen {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      z-index: 9999;
+      transition: opacity 0.5s ease, visibility 0.5s ease;
+      background: var(--hero-dark);
+    }
+
+    .splash-logo {
+      width: 80px;
+      height: 80px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 36px;
+      color: #ffffff;
+      border: 2px solid rgba(255, 255, 255, 0.2);
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+      margin-bottom: 15px;
+      animation: pulseLogo 1s infinite alternate;
+      overflow: hidden;
+      background: #475569;
+    }
+
+    .splash-logo img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .splash-title {
+      color: #ffffff;
+      font-size: 1.5rem;
+      font-weight: 800;
+      letter-spacing: -0.5px;
+    }
+
+    .splash-sub {
+      font-size: 0.9rem;
+      margin-top: 5px;
+      color: var(--slate-300);
+    }
+
+    @keyframes pulseLogo {
+      from { transform: scale(1); }
+      to { transform: scale(1.05); }
+    }
+
+
+    /* ==========================================================
+       KARTU, TABEL & STATISTIK
+       ========================================================== */
+
+    .card-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 25px;
+    }
+
+    .card {
+      border: 1px solid var(--blue-line);
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+      background: white;
+      border-radius: 12px;
+      padding: 20px;
+      margin-bottom: 20px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+    }
+
+    .card:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
+    }
+
+    .card-header {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 20px;
+      padding-bottom: 12px;
+      border-bottom: 2px solid var(--slate-100);
+      border-bottom-color: #dbe8f2;
+    }
+
+    .card-header i {
+      font-size: 1.4rem;
+      padding: 10px;
+      border-radius: 12px;
+      color: var(--blue);
+      background: var(--slate-200);
+    }
+
+    .card-header h2 {
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: var(--navy);
+    }
+
+    .info-list {
+      list-style: none;
+    }
+
+    .info-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 10px 0;
+      border-bottom: 1px dashed var(--slate-200);
+      border-bottom: 2px solid var(--slate-300);
+      font-size: 0.95rem;
+      border-bottom-color: var(--blue-soft);
+    }
+
+    .info-item:last-child {
+      border-bottom: none;
+    }
+
+    .badge {
+      padding: 4px 10px;
+      border-radius: 8px;
+      font-weight: 600;
+      font-size: 0.85rem;
+      color: var(--navy);
+      background: var(--slate-200);
+    }
+
+    .custom-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.9rem;
+    }
+
+    .custom-table th {
+      color: white;
+      text-align: left;
+      padding: 10px;
+      border-radius: 6px;
+      background: var(--blue);
+    }
+
+    .custom-table td {
+      padding: 10px;
+      border-bottom: 2px solid var(--slate-300);
+      border-bottom-color: var(--blue-soft);
+    }
+
+    .stat-container {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 10px;
+      text-align: center;
+    }
+
+    .stat-box {
+      padding: 12px;
+      border-radius: 12px;
+      border: 1px solid var(--slate-300);
+      background: var(--slate-100);
+    }
+
+    .stat-box .num {
+      font-size: 1.4rem;
+      font-weight: 800;
+      color: var(--navy);
+    }
+
+    .stat-box .lbl {
+      font-size: 0.75rem;
+      font-weight: 600;
+      color: var(--blue-muted);
+    }
+
+    .schedule-full-table {
+      margin-top: 15px;
+    }
+
+    .schedule-full-table .custom-table th,
+    .schedule-full-table .custom-table td {
+      padding: 12px 10px;
+      text-align: left;
+    }
+
+    .schedule-full-table .custom-table td:first-child {
+      font-weight: 700;
+      width: 30%;
+      color: var(--navy);
+    }
+
+    .piket-header {
+      display: grid;
+      grid-template-columns: 30% 70%;
+      color: white;
+      font-weight: 700;
+      padding: 12px 10px;
+      border-radius: 8px;
+      margin-top: 15px;
+      background: var(--blue);
+    }
+
+    .piket-header span:first-child {
+      padding-left: 6px;
+    }
+
+    .piket-header span:last-child {
+      padding-left: 10px;
+    }
+
+    .wa-number {
+      color: var(--blue);
+    }
+
+
+    /* ==========================================================
+       JADWAL SERAGAM
+       ========================================================== */
+
+    .clothes-item {
+      border: 1px solid var(--slate-300);
+      border-radius: 12px;
+      padding: 12px 6px;
+      overflow: hidden;
+      z-index: 1;
+      position: relative;
+      cursor: pointer;
+      transition: opacity .3s ease, filter .3s ease, transform .3s ease, box-shadow .3s ease;
+      background: var(--slate-100);
+    }
+
+    .clothes-item .day {
+      font-weight: 700;
+      font-size: 0.8rem;
+      display: block;
+      margin-bottom: 5px;
+      color: var(--blue-muted);
+    }
+
+    .clothes-item i {
+      font-size: 1.5rem;
+      margin: 5px 0;
+      color: var(--blue);
+    }
+
+    .clothes-item .desc {
+      font-size: 0.75rem;
+      font-weight: 600;
+      color: var(--navy);
+    }
+
+    .clothes-item:hover {
+      transform: translateY(-2px);
+    }
+
+    .clothes-item img.uniform-photo {
+      display: none;
+      width: min(100%, 450px);
+      height: auto;
+      max-height: none;
+      object-fit: contain;
+      margin: 25px auto 5px;
+      border-radius: 16px;
+      box-shadow: 0 20px 45px rgba(0, 0, 0, .28), 0 5px 15px rgba(0, 0, 0, .15);
+      animation: uniformPhotoIn .35s ease;
+    }
+
+    .uniform-photo {
+      max-width: 280px;
+      display: none;
+      width: min(100%, 450px);
+      max-height: 380px;
+      object-fit: cover;
+      margin: 25px auto 5px;
+      border-radius: 16px;
+      box-shadow: 0 20px 45px rgba(0, 0, 0, .28), 0 5px 15px rgba(0, 0, 0, .15);
+      animation: uniformPhotoIn .35s ease;
+    }
+
+    .clothes-item.uniform-open .uniform-photo {
+      display: block;
+    }
+
+    .clothes-item.uniform-open {
+      position: relative;
+      z-index: 10;
+      transform: scale(1.03);
+      box-shadow: 0 18px 45px rgba(0, 0, 0, 0.30);
+    }
+
+    .clothes-item.uniform-blur {
+      pointer-events: none;
+      filter: blur(4px);
+      opacity: .45;
+      transform: scale(.98);
+    }
+
+    @keyframes uniformPhotoIn {
+      from { opacity: 0; transform: scale(.92) translateY(10px); }
+      to { opacity: 1; transform: scale(1) translateY(0); }
+    }
+
+    @media (max-width: 600px) {
+      .uniform-photo {
+        width: 100%;
+        max-height: 330px;
+        border-radius: 15px;
+      }
+
+      .clothes-item.uniform-blur {
+        filter: blur(3px);
+      }
+    }
+
+
+    /* ==========================================================
+       ORGANIGRAM KELAS
+       ========================================================== */
+
+    .org-chart {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 15px;
+      padding: 10px 0;
+    }
+
+    .org-node {
+      border: 1px solid #94a3b8;
+      border-radius: 14px;
+      padding: 12px 15px;
+      text-align: center;
+      width: 100%;
+      max-width: 280px;
+      box-shadow: 0 4px 10px rgba(15, 23, 42, 0.08);
+      background: var(--slate-200);
+    }
+
+    .org-node.root {
+      color: #ffffff;
+      box-shadow: 0 6px 15px rgba(15, 23, 42, 0.18);
+      background: var(--blue);
+      border-color: var(--navy);
+    }
+
+    .org-node.root .role,
+    .org-node.root .name {
+      color: #ffffff;
+    }
+
+    .org-node .role {
+      font-size: 0.75rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      margin-bottom: 3px;
+      color: var(--blue-muted);
+    }
+
+    .org-node .name {
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: var(--navy);
+    }
+
+    .org-line {
+      width: 2px;
+      height: 15px;
+      background: #94a3b8;
+    }
+
+    .org-row {
+      display: flex;
+      gap: 10px;
+      width: 100%;
+      justify-content: center;
+    }
+
+    .org-row .org-node {
+      flex: 1;
+      max-width: 190px;
+    }
+
+    .org-person {
+      display: block;
+      width: 100%;
+      margin: 0;
+      padding: 0;
+      border: 0;
+      outline: none;
+      background: transparent;
+      font: inherit;
+      text-align: center;
+      cursor: pointer;
+      -webkit-tap-highlight-color: transparent;
+      transition: color 0.2s ease, transform 0.2s ease;
+      color: var(--navy);
+    }
+
+    .org-node.root .org-person {
+      color: #ffffff;
+    }
+
+    .org-person:hover {
+      text-decoration: underline;
+      color: var(--blue);
+    }
+
+    .org-person:active {
+      transform: scale(0.97);
+    }
+
+    .org-node.root .org-person:hover {
+      color: #ffffff;
+    }
+
+    @media (max-width: 600px) {
+      .org-row .org-node {
+        padding: 10px 8px;
+      }
+
+      .org-node .name {
+        font-size: 0.82rem;
+      }
+
+      .org-node .role {
+        font-size: 0.65rem;
+      }
+    }
+
+
+    /* ==========================================================
+       MEDIA SOSIAL
+       ========================================================== */
+
+    .social-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 14px;
+      width: 100%;
+    }
+
+    .social-card {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      width: 100%;
+      min-width: 0;
+      box-sizing: border-box;
+      padding: 14px;
+      border-radius: 14px;
+      border: 1px solid var(--slate-300);
+      text-decoration: none;
+      transition: 0.25s ease;
+      overflow: hidden;
+      color: var(--navy);
+      background: var(--slate-100);
+    }
+
+    .social-card:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 6px 16px rgba(15, 23, 42, 0.10);
+      border-color: var(--blue);
+      background: #ffffff;
+    }
+
+    .social-icon {
+      width: 42px;
+      height: 42px;
+      min-width: 42px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 12px;
+      font-size: 20px;
+      color: var(--blue);
+      background: var(--slate-200);
+    }
+
+    .social-info {
+      flex: 1;
+      min-width: 0;
+      overflow: hidden;
+    }
+
+    .social-info h3 {
+      margin: 0 0 3px;
+      font-size: 0.9rem;
+      font-weight: 800;
+      color: var(--navy);
+    }
+
+    .social-info p {
+      margin: 0;
+      font-size: 0.75rem;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      color: var(--blue-muted);
+    }
+
+    .social-arrow {
+      flex-shrink: 0;
+      color: var(--blue-muted);
+    }
+
+    @media (max-width: 900px) {
+      .social-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+    }
+
+    @media (max-width: 600px) {
+      .social-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+
+    /* ==========================================================
+       FOOTER
+       ========================================================== */
+
+    .site-footer {
+      margin-top: 50px;
+      padding: 30px 20px;
+      text-align: center;
+      border-top: 1px solid var(--slate-300);
+      border-top-color: var(--blue-line);
+      color: var(--blue-muted);
+    }
+
+    .footer-title {
+      font-size: 1rem;
+      font-weight: 800;
+      margin-bottom: 6px;
+      color: var(--navy);
+    }
+
+    .footer-credit {
+      font-size: 0.85rem;
+      margin-bottom: 5px;
+    }
+
+    .footer-copy {
+      font-size: 0.75rem;
+      color: #7f9bb3;
+    }
+
+    .bc-link {
+      cursor: pointer;
+      text-decoration: underline;
+      text-underline-offset: 3px;
+      background: none;
+      border: none;
+      padding: 0;
+      font: inherit;
+      font-weight: 700;
+      color: var(--blue);
+    }
+
+
+    /* ==========================================================
+       POPUP FOTO ORGANIGRAM
+       ========================================================== */
+
+    .person-modal {
+      position: fixed;
+      inset: 0;
+      z-index: 99999;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      backdrop-filter: blur(5px);
+      background: rgba(15, 23, 42, .78);
+    }
+
+    .person-modal.show {
+      display: flex;
+    }
+
+    .person-modal-box {
+      position: relative;
+      width: min(92vw, 360px);
+      max-height: 90vh;
+      padding: 18px;
+      overflow: auto;
+      background: #ffffff;
+      border-radius: 20px;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+      text-align: center;
+    }
+
+    .person-modal-close {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      z-index: 5;
+      width: 40px;
+      height: 40px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border: 2px solid #ffffff;
+      border-radius: 50%;
+      color: #ffffff;
+      font-size: 18px;
+      cursor: pointer;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.35);
+      -webkit-tap-highlight-color: transparent;
+      background: rgba(12, 45, 72, .8);
+    }
+
+    .person-modal-image {
+      width: 100%;
+      height: auto;
+      aspect-ratio: 3 / 4;
+      max-height: 62vh;
+      display: block;
+      margin: 8px auto 15px;
+      border-radius: 14px;
+      object-fit: cover;
+      object-position: center top;
+      background: var(--slate-200);
+    }
+
+    .person-modal-name {
+      margin: 0 45px 4px;
+      font-size: 1.1rem;
+      font-weight: 800;
+      color: var(--navy);
+    }
+
+    .person-modal-hint {
+      font-size: 0.78rem;
+      color: var(--blue-muted);
+    }
+
+    .person-photo-missing {
+      width: 100%;
+      aspect-ratio: 3 / 4;
+      max-height: 62vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 8px auto 15px;
+      padding: 30px;
+      border-radius: 14px;
+      color: #64748b;
+      font-size: 0.85rem;
+      text-align: center;
+      background: var(--slate-200);
+    }
+
+    @media (max-width: 600px) {
+      .person-modal {
+        padding: 12px;
+      }
+
+      .person-modal-box {
+        width: min(94vw, 360px);
+        padding: 14px;
+        border-radius: 18px;
+      }
+
+      .person-modal-image {
+        max-height: 58vh;
+      }
+
+      .person-modal-name {
+        font-size: 1rem;
+      }
+    }
+
+
+    /* ==========================================================
+       POPUP TIM BARUDAK CUY
+       ========================================================== */
+
+    .bc-ov {
+      position: fixed;
+      inset: 0;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 16px;
+      z-index: 99999;
+      overscroll-behavior: contain;
+      overflow: hidden;
+      background: rgba(0, 0, 0, .5);
+    }
+
+    .bc-ov.on {
+      display: flex;
+    }
+
+    .bc-modal {
+      border-radius: 8px;
+      max-width: min(620px, 100%);
+      width: 100%;
+      max-height: 90vh;
+      overflow: auto;
+      padding: 20px;
+      position: relative;
+      margin: auto;
+      min-width: 0;
+      border-color: var(--blue-edge);
+      color: var(--ink);
+      border: 2px solid var(--blue);
+      background: #f3f4f6;
+    }
+
+    .bc-modal h2 {
+      margin: 0 0 4px;
+      font-size: 1.25rem;
+      font-weight: 700;
+      padding-right: 36px;
+      color: var(--navy);
+    }
+
+    .bc-sub {
+      margin: 0 0 16px;
+      font-size: .88rem;
+      color: #3d6283;
+    }
+
+    .bc-x {
+      position: absolute;
+      top: 12px;
+      right: 12px;
+      width: 30px;
+      height: 30px;
+      border-radius: 4px;
+      border: 1px solid var(--navy);
+      font-size: 1.1rem;
+      line-height: 1;
+      cursor: pointer;
+      background: var(--blue);
+      color: #ffffff;
+    }
+
+    .bc-x:hover {
+      background: var(--navy);
+    }
+
+    .bc-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
+
+    .bc-box {
+      border-radius: 6px;
+      padding: 14px;
+      text-align: left;
+      border-color: var(--blue-line);
+      background: #ffffff;
+      border: 1px solid var(--blue-edge);
+      border-top: 4px solid var(--blue);
+    }
+
+    .bc-box h3 {
+      margin: 0 0 8px;
+      padding-bottom: 6px;
+      font-size: .95rem;
+      font-weight: 700;
+      border-bottom-color: var(--blue-soft);
+      color: var(--navy);
+      border-bottom: 1px solid var(--blue-line);
+    }
+
+    .bc-box p {
+      margin: 0;
+      font-size: .92rem;
+      line-height: 1.55;
+      color: var(--ink);
+    }
+
+    .bc-mem {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+
+    .bc-view {
+      text-align: center;
+    }
+
+    .bc-view[hidden] {
+      display: none;
+    }
+
+    .bc-back {
+      border: 1px solid var(--navy);
+      border-radius: 4px;
+      padding: 6px 12px;
+      font: inherit;
+      font-size: .88rem;
+      cursor: pointer;
+      float: left;
+      background: var(--blue);
+      color: #ffffff;
+    }
+
+    .bc-back:hover {
+      background: var(--navy);
+    }
+
+    .bc-photo {
+      clear: both;
+      width: min(250px, 70%);
+      aspect-ratio: 3/4;
+      margin: 12px auto;
+      border-radius: 4px;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #4b5563;
+      text-align: center;
+      border-color: var(--blue-edge);
+      border: 2px solid var(--blue);
+      background: #d1d5db;
+    }
+
+    .bc-photo img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .bc-ph {
+      padding: 14px;
+      font-size: .82rem;
+      line-height: 1.45;
+    }
+
+    .bc-ph b {
+      display: block;
+      font-size: 2.6rem;
+      font-weight: 700;
+      margin-bottom: 6px;
+      color: var(--blue);
+    }
+
+    .bc-nm {
+      font-size: 1.15rem;
+      font-weight: 700;
+      margin-bottom: 10px;
+      color: var(--navy);
+    }
+
+    .bc-nav {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 16px;
+      font-size: .88rem;
+      color: var(--blue-muted);
+    }
+
+    .bc-nav button {
+      width: 36px;
+      height: 36px;
+      border-radius: 4px;
+      border: 1px solid var(--navy);
+      font-size: 1.3rem;
+      line-height: 1;
+      cursor: pointer;
+      background: var(--blue);
+      color: #ffffff;
+    }
+
+    .bc-nav button:hover {
+      background: var(--navy);
+    }
+
+    .bc-grid .bc-box:nth-child(1) {
+      order: 1;
+    }
+
+    .bc-grid .bc-box:nth-child(3) {
+      order: 2;
+    }
+
+    .bc-grid .bc-box:nth-child(2) {
+      order: 3;
+      grid-column: 1 / -1;
+    }
+
+    .bc-grid .bc-box:nth-child(4) {
+      order: 4;
+      grid-column: 1 / -1;
+    }
+
+    .bc-mem.bc-org {
+      --org-line: var(--blue);
+      --org-dark: var(--navy);
+      --org-soft: #d6e6f2;
+      --org-edge: var(--blue-edge);
+      --org-sub: #3d6283;
+      flex-direction: column;
+      align-items: center;
+      gap: 22px;
+      padding: 6px 0 2px;
+    }
+
+    .bc-row {
+      position: relative;
+      display: flex;
+      justify-content: center;
+      gap: 8px;
+      width: 100%;
+      flex-wrap: wrap;
+    }
+
+    .bc-row + .bc-row::before {
+      content: "";
+      position: absolute;
+      top: -22px;
+      left: 50%;
+      width: 2px;
+      height: 22px;
+      background: var(--org-line);
+      transform: translateX(-1px);
+    }
+
+    .bc-row.bc-wide::after {
+      content: "";
+      position: absolute;
+      top: -11px;
+      left: 12.5%;
+      right: 12.5%;
+      height: 2px;
+      background: var(--org-line);
+    }
+
+    .bc-row.bc-wide .bc-n::before {
+      content: "";
+      position: absolute;
+      top: -11px;
+      left: 50%;
+      width: 2px;
+      height: 11px;
+      background: var(--org-line);
+      transform: translateX(-1px);
+    }
+
+    .bc-n {
+      position: relative;
+      flex: 1 1 0;
+      min-width: 0;
+      max-width: 92px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 2px;
+      padding: 8px 4px;
+      background: #fff;
+      border: 1px solid var(--org-edge);
+      border-radius: 8px;
+      font: inherit;
+      color: var(--org-dark);
+      cursor: pointer;
+      transition: transform .15s, box-shadow .15s;
+    }
+
+    .bc-n:hover,
+    .bc-n:focus-visible {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 10px rgba(20, 93, 160, .25);
+      background: #fff;
+      outline: none;
+    }
+
+    .bc-n i {
+      display: grid;
+      place-items: center;
+      width: 38px;
+      height: 38px;
+      border-radius: 50%;
+      background: var(--org-soft);
+      color: var(--org-line);
+      font-style: normal;
+      font-weight: 700;
+    }
+
+    .bc-n b {
+      max-width: 100%;
+      font-size: .82rem;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .bc-n small {
+      font-size: .7rem;
+      line-height: 1.2;
+      text-align: center;
+      color: var(--org-sub);
+    }
+
+    .bc-n.bc-top {
+      max-width: 112px;
+      background: var(--org-line);
+      border-color: var(--org-dark);
+      color: #fff;
+    }
+
+    .bc-n.bc-top:hover {
+      background: var(--org-line);
+    }
+
+    .bc-n.bc-top i {
+      width: 46px;
+      height: 46px;
+      background: #fff;
+      font-size: 1.1rem;
+    }
+
+    .bc-n.bc-top small {
+      color: #d6e6f7;
+    }
+
+    @media(max-width:480px) {
+      .bc-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+
+    /* ==========================================================
+       ANIMASI SAAT SCROLL
+       ========================================================== */
+
+    .scroll-reveal {
+      opacity: 0;
+      transform: translateY(55px) scale(.97);
+      filter: blur(5px);
+      transition: opacity .75s ease, transform .75s cubic-bezier(.2, .8, .2, 1), filter .75s ease;
+      will-change: transform, opacity, filter;
+    }
+
+    .scroll-reveal.show {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+      filter: blur(0);
+    }
+
+    .scroll-reveal.from-left {
+      transform: translateX(-55px) scale(.97);
+    }
+
+    .scroll-reveal.from-left.show {
+      transform: translateX(0) scale(1);
+    }
+
+    .scroll-reveal.from-right {
+      transform: translateX(55px) scale(.97);
+    }
+
+    .scroll-reveal.from-right.show {
+      transform: translateX(0) scale(1);
+    }
+
+    @media(prefers-reduced-motion:reduce) {
+      .scroll-reveal {
+        opacity: 1;
+        transform: none;
+        filter: none;
+        transition: none;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Logo kelas (pojok kiri atas) -->
+  <div class="class-logo"><img src="logoK.jpg" alt="Logo kelas"></div>
+
+  <!-- Hero + tombol filter -->
+  <section class="hero">
+    <div class="container">
+      <div class="app-logo"><img src="logo.jpg" alt="Logo XI PPLG 2"></div>
+      <h1>XI PPLG 2</h1>
+      <div class="quick-tags">
+        <button type="button" class="tag-btn" data-filter="Wali Kelas">Wali Kelas</button>
+        <button type="button" class="tag-btn" data-filter="Organigram">Organigram</button>
+        <button type="button" class="tag-btn" data-filter="Jadwal Pelajaran">Jadwal Pelajaran</button>
+        <button type="button" class="tag-btn" data-filter="Piket Kebersihan">Piket Kebersihan</button>
+        <button type="button" class="tag-btn" data-filter="Seragam">Seragam</button>
+        <button type="button" class="tag-btn" data-filter="Media sosial">Media sosial</button>
+        <a href="gallery.html" class="tag-btn"><i class="fa-solid fa-images"></i> Galeri Kelas</a>
+      </div>
+      <div class="reset-filter-container" id="resetContainer" hidden>
+        <button class="return-home-btn" type="button" aria-label="Kembali ke semua informasi" id="resetBtn"><i class="fa-solid fa-arrow-left" aria-hidden="true"></i> <span>Kembali ke Semua Informasi</span></button>
+      </div>
+    </div>
+  </section>
+
+  <!-- Keterangan kelas -->
+  <div class="class-info">
+    <div class="class-title">XI PPLG 2</div>
+    <div class="class-desc">Pengembangan Perangkat Lunak</div>
+    <div class="class-desc">dan Gim</div>
+  </div>
+
+  <!-- Kartu: Data Siswa -->
+  <div class="card">
+    <div class="card-header">
+      <i class="fa-solid fa-users"></i>
+      <h2>Data Siswa</h2>
+    </div>
+    <div class="stat-container">
+      <div class="stat-box">
+        <div class="num">41</div>
+        <div class="lbl">Jumlah Siswa</div>
+      </div>
+      <div class="stat-box">
+        <div class="num">18</div>
+        <div class="lbl">Siswa Laki-laki</div>
+      </div>
+      <div class="stat-box">
+        <div class="num">23</div>
+        <div class="lbl">Siswa Perempuan</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Konten utama -->
+  <main class="container">
+    <div class="card-grid">
+
+      <!-- Kartu: Wali Kelas -->
+      <div class="card" data-keywords="wali kelas guru pengajar wali">
+        <div class="card-header">
+          <i class="fa-solid fa-user-tie"></i>
+          <h2>Wali Kelas</h2>
+        </div>
+        <ul class="info-list">
+          <li class="info-item"><span>Nama Guru</span> <span class="badge">Leny oktaviani</span></li>
+          <li class="info-item"><span>Kontak / WA</span> <a href="https://wa.me/6285693422565" class="wa-number">0812-3456-7890</a></li>
+          <li class="info-item"><span>Mata Pelajaran</span> <span>Bahasa Indonesia</span></li>
+        </ul>
+      </div>
+
+      <!-- Kartu: Media Sosial -->
+      <div class="card" data-keywords="Media sosial instagram tiktok spotify">
+        <div class="card-header">
+          <i class="fa-solid fa-share-nodes"></i>
+          <h2>Media Sosial</h2>
+        </div>
+        <p class="social-intro">Temukan aktivitas, cerita, dan kenangan XI PPLG 2 melalui media sosial kelas.</p>
+        <div class="social-grid">
+          <a href="https://www.instagram.com/warriorclass_ofsmk4lppm?igsi=dDA2MGRlb2Z4dDR4" target="_blank" class="social-card">
+            <div class="social-icon"><i class="fa-brands fa-instagram"></i></div>
+            <div class="social-info">
+              <h3>Instagram</h3>
+              <p>@XI-PPLG-2</p>
+            </div>
+            <i class="fa-solid fa-chevron-right social-arrow"></i>
+          </a>
+          <a href="https://www.tiktok.com/@xpplg2_lppmri?_r=1&_t=ZS-994J8AHt21f" target="_blank" class="social-card">
+            <div class="social-icon"><i class="fa-brands fa-tiktok"></i></div>
+            <div class="social-info">
+              <h3>TikTok 10</h3>
+              <p>@xpplg2_lppmri</p>
+            </div>
+            <i class="fa-solid fa-chevron-right social-arrow"></i>
+          </a>
+          <a href="https://open.spotify.com/playlist/5av6uUXRbYs8BwNrI3U69D?si=a0aaa06db023478c" target="_blank" class="social-card">
+            <div class="social-icon"><i class="fa-brands fa-spotify"></i></div>
+            <div class="social-info">
+              <h3>Spotify</h3>
+              <p>Playlist XI PPLG 2</p>
+            </div>
+            <i class="fa-solid fa-chevron-right social-arrow"></i>
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Kartu: Jadwal Pakaian (5 Hari) -->
+    <div class="card" data-keywords="jadwal pakaian baju seragam senin selasa rabu kamis jumat">
+      <div class="card-header">
+        <i class="fa-solid fa-shirt"></i>
+        <h2>Jadwal Pakaian (5 Hari)</h2>
+      </div>
+      <div class="clothes-item" role="button" tabindex="0"><span class="day">SENIN</span> <i class="fa-solid fa-shirt"></i> <span class="desc">Putih Abu</span> <img class="uniform-photo" src="seragamsenin.jpg" alt="Seragam Senin"></div>
+      <div class="clothes-item" role="button" tabindex="0"><span class="day">SELASA</span> <i class="fa-solid fa-shirt"></i> <span class="desc">Seragam Khusus</span> <img class="uniform-photo" src="seragamSelasa.jpg" alt="Seragam Selasa"></div>
+      <div class="clothes-item" role="button" tabindex="0"><span class="day">RABU</span> <i class="fa-solid fa-shirt"></i> <span class="desc">Produktif</span> <img class="uniform-photo" src="seragamrabu.jpg" alt="Seragam Rabu"></div>
+      <div class="clothes-item" role="button" tabindex="0"><span class="day">KAMIS</span> <i class="fa-solid fa-shirt"></i> <span class="desc">Batik SMK</span> <img class="uniform-photo" src="seragamKamis.jpg" alt="Seragam Kamis"></div>
+      <div class="clothes-item" role="button" tabindex="0"><span class="day">JUMAT</span> <i class="fa-solid fa-shirt"></i> <span class="desc">Baju Muslim</span> <img class="uniform-photo" src="seragamjumat.jpg" alt="Seragam Jumat"></div>
+    </div>
+
+    <!-- Kartu: Struktur Organigram 19 -->
+    <div class="card" data-keywords="organigram struktur ketua wakil sekretaris bendahara pengurus">
+      <div class="card-header">
+        <i class="fa-solid fa-sitemap"></i>
+        <h2>Struktur Organigram 19</h2>
+      </div>
+      <div class="org-chart">
+        <div class="org-node root">
+          <div class="role">Wali Kelas</div>
+          <button type="button" class="name org-person" data-name="Leny octaviani" data-photo="foto-organigram/leny.jpg">Leny octaviani</button>
+        </div>
+        <div class="org-line"></div>
+        <div class="org-row">
+          <div class="org-node">
+            <div class="role">Ketua Kelas</div>
+            <button type="button" class="name org-person" data-name="M. Daffa Atmadeva" data-photo="foto-organigram/daffa.jpg">M. Daffa Atmadeva</button>
+          </div>
+          <div class="org-node">
+            <div class="role">Wakil Ketua</div>
+            <button type="button" class="name org-person" data-name="Vivih Riyanti" data-photo="foto-organigram/vivih.jpg">Vivih Riyanti</button>
+          </div>
+        </div>
+        <div class="org-line"></div>
+        <div class="org-row">
+          <div class="org-node">
+            <div class="role">Sekretaris 1</div>
+            <button type="button" class="name org-person" data-name="Dewini" data-photo="foto-organigram/dewini.jpg">Dewini</button>
+          </div>
+          <div class="org-node">
+            <div class="role">Sekretaris 2</div>
+            <button type="button" class="name org-person" data-name="Windi lisdinar" data-photo="foto-organigram/windi.jpg">Windi lisdinar</button>
+          </div>
+        </div>
+        <div class="org-line"></div>
+        <div class="org-row">
+          <div class="org-node">
+            <div class="role">Bendahara 1</div>
+            <button type="button" class="name org-person" data-name="Azizah Tunnafsyah" data-photo="foto-organigram/azizah.jpg">Azizah Tunnafsyah</button>
+          </div>
+          <div class="org-node">
+            <div class="role">Bendahara 2</div>
+            <button type="button" class="name org-person" data-name="Nabil Azmi R." data-photo="foto-organigram/nabil.jpg">Nabil Azmi R.</button>
+          </div>
+        </div>
+        <div class="org-line"></div>
+        <div class="org-row">
+          <div class="org-node">
+            <div class="role">Absensi 1</div>
+            <button type="button" class="name org-person" data-name="Alexa zeo" data-photo="foto-organigram/alexa.jpg">Alexa zeo</button>
+          </div>
+          <div class="org-node">
+            <div class="role">Absensi 2</div>
+            <button type="button" class="name org-person" data-name="Syakira" data-photo="foto-organigram/syakira.jpg">Syakira</button>
+          </div>
+        </div>
+        <div class="org-line"></div>
+        <div class="org-row">
+          <div class="org-node">
+            <div class="role">Kebersihan 1</div>
+            <button type="button" class="name org-person" data-name="Farhan" data-photo="foto-organigram/farhan.jpg">Farhan</button>
+          </div>
+          <div class="org-node">
+            <div class="role">Kebersihan 2</div>
+            <button type="button" class="name org-person" data-name="Adit" data-photo="foto-organigram/adit.jpg">Adit</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Kartu: Jadwal Piket Kebersihan -->
+    <div class="card" data-keywords="piket kebersihan kebersihan senin selasa rabu kamis jumat">
+      <div class="card-header">
+        <i class="fa-solid fa-broom"></i>
+        <h2>Jadwal Piket Kebersihan</h2>
+      </div>
+      <div class="piket-header"><span>Hari</span> <span>Nama Siswa</span></div>
+      <ul class="info-list">
+        <li class="info-item"><span class="badge">Senin</span> <span>Intan, Aditya, Zahra, Siti, Syakira, Adel, Ilham, Vivih, Riri</span></li>
+        <li class="info-item"><span class="badge">Selasa</span> <span>Zaki, Mutia, Sintia, Alexa, Musemil, Daffa, Windi, Farhan</span></li>
+        <li class="info-item"><span class="badge">Rabu</span> <span>Dewi, Agasha, Reyhan, Maiza, Sanchia, Aprizal, Rafi, Arfan</span></li>
+        <li class="info-item"><span class="badge">Kamis</span> <span>Barran, Khisam, Lutfi, Chintya, Nabil, Fasha, Kamila, Lidia</span></li>
+        <li class="info-item"><span class="badge">Jumat</span> <span>Dewini, Maulana, Rama, Aulia, Satria, Azizah, Syifa, April</span></li>
+      </ul>
+    </div>
+
+    <!-- Kartu: Jadwal Pelajaran -->
+    <div class="card" data-keywords="jadwal pelajaran mapel materi jam belajar senin selasa rabu kamis jumat">
+      <div class="card-header">
+        <i class="fa-solid fa-calendar-days"></i>
+        <h2>Jadwal Pelajaran</h2>
+      </div>
+      <div class="schedule-full-table">
+        <table class="custom-table">
+          <thead>
+            <tr>
+              <th>Hari</th>
+              <th>Mata Pelajaran</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Senin</td>
+              <td>MOS / B.Inggris / Produktif</td>
+            </tr>
+            <tr>
+              <td>Selasa</td>
+              <td>PKWU / B.Jepang / Project Kejuruan / PKWU / B.Indonesia</td>
+            </tr>
+            <tr>
+              <td>Rabu</td>
+              <td>Produktif / Matematika / B.Inggris / B.Indonesia / Pendidikan Pancasila</td>
+            </tr>
+            <tr>
+              <td>Kamis</td>
+              <td>Produktif / Sejarah / Matematika / PJOK</td>
+            </tr>
+            <tr>
+              <td>Jumat</td>
+              <td>Bimbingan Konseling / B.Sunda / PABP</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </main>
+
+  <!-- Splash screen -->
+  <div id="splash-screen">
+    <div class="splash-logo"><img src="logo.jpg" alt="Logo XI PPLG 2"></div>
+    <div class="splash-title">XI PPLG 2</div>
+    <div class="splash-sub">Welcome To Our class</div>
+  </div>
+
+  <!-- Footer -->
+  <footer class="site-footer">
+    <div class="footer-title">XI PPLG 2</div>
+    <div class="footer-credit">
+      Dibuat & dikembangkan oleh
+      <button class="bc-link" id="bcOpen">BARUDAK CUY</button>
+    </div>
+    <div class="footer-copy">© 2026 XI PPLG 2 • Class Information Hub</div>
+  </footer>
+
+  <!-- Popup tim Barudak Cuy -->
+  <div class="bc-ov" id="bcOv">
+    <div class="bc-modal" role="dialog" aria-modal="true">
+      <button class="bc-x" id="bcClose" aria-label="Tutup">×</button>
+      <h2>Siapa sih Barudak Cuy?</h2>
+      <p class="bc-sub">Tim yang bikin website kelas ini</p>
+      <div class="bc-grid">
+        <div class="bc-box">
+          <h3>Tentang</h3>
+          <p>Barudak Cuy adalah tim 7 orang pembuat website kelas XI PPLG 2.</p>
+        </div>
+        <div class="bc-box">
+          <h3>Anggota</h3>
+          <div class="bc-mem" id="bcMem"></div>
+        </div>
+        <div class="bc-box">
+          <h3>Motto</h3>
+          <p>"Satu Kelas, Satu Tujuan, Banyak Pencapaian. 
+                  Karna kita Terbaik-Terbaik-Terbaik."</p>
+        </div>
+        <div class="bc-box">
+          <h3>Info Lain</h3>
+          <p>Dibentuk: tahun 2025<br>Kelas: XI PPLG 2<br>Proyek: Class Information Hub</p>
+        </div>
+      </div>
+      <div class="bc-view" id="bcView" hidden>
+        <button class="bc-back" id="bcBack">← Kembali</button>
+        <div class="bc-photo" id="bcPhoto"></div>
+        <div class="bc-nm" id="bcNm"></div>
+        <div class="bc-nav">
+          <button id="bcPrev" aria-label="Sebelumnya">‹</button>
+          <span id="bcCnt"></span>
+          <button id="bcNext" aria-label="Berikutnya">›</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Popup foto organigram -->
+  <div class="person-modal" id="personModal" aria-hidden="true">
+    <div class="person-modal-box" role="dialog" aria-modal="true" aria-labelledby="personModalName">
+      <button type="button" class="person-modal-close" id="personModalClose" aria-label="Tutup foto"><i class="fa-solid fa-xmark"></i></button>
+      <img id="personModalImage" class="person-modal-image" alt>
+      <div id="personPhotoMissing" class="person-photo-missing" style="display: none;">Foto orang ini belum ditambahkan.</div>
+      <div id="personModalName" class="person-modal-name"></div>
+      <div class="person-modal-hint">Klik Tombol X untuk menutup</div>
+    </div>
+  </div>
+
+  <script>
+    /* =========================================================
+       XI PPLG 2 - Class Information Hub
+       Isi: splash screen, filter kartu, seragam, animasi scroll,
+            popup foto organigram, popup tim "Barudak Cuy"
+       ========================================================= */
+
+    /* ---------- Data tim Barudak Cuy (edit nama / foto di sini) ---------- */
+    const MEMBERS = [
+      { nama: 'M. Daffa atmadeva',   foto: 'barudak/1.jpg' },
+      { nama: 'Parhan fadhlurahman', foto: 'barudak/2.jpg' },
+      { nama: 'Satria Fajril',       foto: 'barudak/3.jpg' },
+      { nama: 'Arfan ardiansah',     foto: 'barudak/4.jpg' },
+      { nama: 'Ilham fajar',         foto: 'barudak/5.jpg' },
+      { nama: 'Agasha arfarizki',    foto: 'barudak/6.jpg' },
+      { nama: 'Aditya',              foto: 'barudak/7.jpg' }
+    ];
+
+    /* Susunan piramida: i = urutan di MEMBERS */
+    const TEAM_TREE = [
+      [{ i: 0, peran: 'Ketua & ide fitur', top: true }],
+      [{ i: 1, peran: 'Wakil Ketua & ide fitur' }],
+      [{ i: 2, peran: 'Konsep & coding' }, { i: 3, peran: 'Referensi' }, { i: 4, peran: 'Editing' }],
+      [{ i: 5, peran: 'Referensi' }, { i: 6, peran: 'Uji coba web' }]
+    ];
+
+    const $ = (selector, root = document) => root.querySelector(selector);
+    const $$ = (selector, root = document) => [...root.querySelectorAll(selector)];
+
+    /* =========================================================
+       1. SPLASH SCREEN (hilang otomatis setelah 2 detik)
+       ========================================================= */
+    function initSplash() {
+      const splash = $('#splash-screen');
+      if (!splash) return;
+
+      setTimeout(() => {
+        splash.style.opacity = '0';
+        splash.style.visibility = 'hidden';
+        setTimeout(() => { splash.style.display = 'none'; }, 500);
+      }, 2000);
+    }
+
+    /* =========================================================
+       2. FILTER KARTU (tombol kategori di hero)
+       ========================================================= */
+    function initFilter() {
+      const cards = $$('.card');
+      const buttons = $$('.tag-btn[data-filter]');
+      const resetBox = $('#resetContainer');
+      const resetBtn = $('#resetBtn');
+
+      function applyFilter(keyword, button) {
+        const wanted = keyword.toLowerCase().split(/\s+/);
+
+        buttons.forEach(btn => btn.classList.toggle('active', btn === button));
+
+        cards.forEach(card => {
+          const words = (card.dataset.keywords || '').toLowerCase().split(/\s+/);
+          card.style.display = wanted.every(w => words.includes(w)) ? '' : 'none';
+        });
+
+        resetBox.hidden = false;
+      }
+
+      function resetFilter() {
+        cards.forEach(card => { card.style.display = ''; });
+        buttons.forEach(btn => btn.classList.remove('active'));
+        resetBox.hidden = true;
+        $('.hero')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+
+      buttons.forEach(btn => {
+        btn.addEventListener('click', () => applyFilter(btn.dataset.filter, btn));
+      });
+      resetBtn?.addEventListener('click', resetFilter);
+    }
+
+    /* =========================================================
+       3. JADWAL SERAGAM (klik hari -> foto muncul, yang lain blur)
+       ========================================================= */
+    function initUniform() {
+      const items = $$('.clothes-item');
+
+      function toggle(item) {
+        const wasOpen = item.classList.contains('uniform-open');
+
+        items.forEach(el => el.classList.remove('uniform-open', 'uniform-blur'));
+        if (wasOpen) return;
+
+        item.classList.add('uniform-open');
+        items.forEach(el => { if (el !== item) el.classList.add('uniform-blur'); });
+      }
+
+      items.forEach(item => {
+        item.addEventListener('click', () => toggle(item));
+        item.addEventListener('keydown', e => {
+          if (e.key === 'Enter' || e.key === ' ') {
+            e.preventDefault();
+            toggle(item);
+          }
+        });
+      });
+    }
+
+    /* =========================================================
+       4. ANIMASI MUNCUL SAAT SCROLL
+       ========================================================= */
+    function initScrollReveal() {
+      const targets = $$('.card, .schedule-full-table, .org-chart, .stat-container, .clothes-item');
+
+      targets.forEach((el, i) => {
+        el.classList.add('scroll-reveal');
+        if (i % 4 === 1) el.classList.add('from-left');
+        else if (i % 4 === 3) el.classList.add('from-right');
+      });
+
+      const observer = new IntersectionObserver(entries => {
+        entries.forEach(entry => entry.target.classList.toggle('show', entry.isIntersecting));
+      }, { threshold: 0.15 });
+
+      targets.forEach(el => observer.observe(el));
+    }
+
+    /* =========================================================
+       5. POPUP FOTO ORGANIGRAM
+       ========================================================= */
+    function initPersonModal() {
+      const modal = $('#personModal');
+      const image = $('#personModalImage');
+      const name = $('#personModalName');
+      const missing = $('#personPhotoMissing');
+      const closeBtn = $('#personModalClose');
+      if (!modal || !image || !name || !missing) return;
+
+      function open(button) {
+        const person = button.dataset.name || button.textContent.trim();
+        const photo = button.dataset.photo || '';
+
+        name.textContent = person;
+        image.alt = 'Foto ' + person;
+        image.style.display = 'block';
+        missing.style.display = 'none';
+
+        if (photo) {
+          image.src = photo;
+        } else {
+          image.removeAttribute('src');
+          image.style.display = 'none';
+          missing.style.display = 'flex';
+        }
+
+        modal.classList.add('show');
+        modal.setAttribute('aria-hidden', 'false');
+        document.body.classList.add('person-modal-open');
+      }
+
+      function close() {
+        modal.classList.remove('show');
+        modal.setAttribute('aria-hidden', 'true');
+        image.removeAttribute('src');
+        document.body.classList.remove('person-modal-open');
+      }
+
+      $$('.org-person').forEach(btn => btn.addEventListener('click', () => open(btn)));
+
+      image.addEventListener('error', () => {
+        image.style.display = 'none';
+        missing.style.display = 'flex';
+      });
+
+      closeBtn?.addEventListener('click', close);
+      modal.addEventListener('click', e => { if (e.target === modal) close(); });
+      document.addEventListener('keydown', e => {
+        if (e.key === 'Escape' && modal.classList.contains('show')) close();
+      });
+    }
+
+    /* =========================================================
+       6. POPUP TIM "BARUDAK CUY"
+       ========================================================= */
+    function initTeamModal() {
+      const overlay = $('#bcOv');
+      const openBtn = $('#bcOpen');
+      if (!overlay || !openBtn) return;
+
+      const grid = $('.bc-grid', overlay);
+      const subtitle = $('.bc-sub', overlay);
+      const view = $('#bcView');
+      const photoBox = $('#bcPhoto');
+      const nameBox = $('#bcNm');
+      const counter = $('#bcCnt');
+      const members = $('#bcMem');
+
+      let current = 0;
+      let scrollX = 0;
+      let scrollY = 0;
+
+      /* "M. Daffa atmadeva" -> "Daffa", "Ilham fajar" -> "Ilham" */
+      const shortName = full => {
+        const parts = full.trim().split(' ');
+        return full.startsWith('M. ') ? parts[1] : parts[0];
+      };
+
+      /* --- bangun piramida anggota --- */
+      members.classList.add('bc-org');
+      TEAM_TREE.forEach((level, levelIndex) => {
+        const row = document.createElement('div');
+        row.className = 'bc-row' + (levelIndex === 2 ? ' bc-wide' : '');
+
+        level.forEach(node => {
+          const person = MEMBERS[node.i];
+          const btn = document.createElement('button');
+          btn.type = 'button';
+          btn.className = 'bc-n' + (node.top ? ' bc-top' : '');
+
+          const initial = document.createElement('i');
+          initial.textContent = person.nama.trim().charAt(0).toUpperCase();
+
+          const label = document.createElement('b');
+          label.textContent = shortName(person.nama);
+
+          const role = document.createElement('small');
+          role.textContent = node.peran;
+
+          btn.append(initial, label, role);
+          btn.addEventListener('click', () => showPerson(node.i));
+          row.appendChild(btn);
+        });
+
+        members.appendChild(row);
+      });
+
+      /* --- tampilan foto satu anggota --- */
+      function showPerson(index) {
+        current = (index + MEMBERS.length) % MEMBERS.length;
+        const person = MEMBERS[current];
+
+        photoBox.innerHTML = '';
+        const img = new Image();
+        img.alt = person.nama;
+        img.onerror = () => {
+          photoBox.innerHTML = '';
+          const ph = document.createElement('div');
+          ph.className = 'bc-ph';
+          ph.innerHTML = '<b></b>Foto belum ada.<br>Taruh di<br><span></span>';
+          ph.querySelector('b').textContent = person.nama.charAt(0).toUpperCase();
+          ph.querySelector('span').textContent = person.foto;
+          photoBox.appendChild(ph);
+        };
+        img.src = person.foto;
+        photoBox.appendChild(img);
+
+        nameBox.textContent = person.nama;
+        counter.textContent = `${current + 1} / ${MEMBERS.length}`;
+
+        grid.style.display = 'none';
+        subtitle.style.display = 'none';
+        view.hidden = false;
+      }
+
+      function showList() {
+        view.hidden = true;
+        grid.style.display = '';
+        subtitle.style.display = '';
+      }
+
+      /* --- buka / tutup popup (kunci scroll halaman di belakang) --- */
+      function openModal(e) {
+        e?.preventDefault();
+        scrollX = window.pageXOffset;
+        scrollY = window.pageYOffset;
+        document.body.style.top = -scrollY + 'px';
+        document.body.style.left = -scrollX + 'px';
+        document.documentElement.classList.add('bc-lock');
+        document.body.classList.add('bc-lock');
+        showList();
+        overlay.classList.add('on');
+      }
+
+      function closeModal() {
+        overlay.classList.remove('on');
+        document.documentElement.classList.remove('bc-lock');
+        document.body.classList.remove('bc-lock');
+        document.body.style.top = '';
+        document.body.style.left = '';
+        window.scrollTo(scrollX, scrollY);
+      }
+
+      openBtn.addEventListener('mousedown', e => e.preventDefault());
+      openBtn.addEventListener('click', openModal);
+      $('#bcClose').addEventListener('click', closeModal);
+      $('#bcBack').addEventListener('click', showList);
+      $('#bcPrev').addEventListener('click', () => showPerson(current - 1));
+      $('#bcNext').addEventListener('click', () => showPerson(current + 1));
+      overlay.addEventListener('click', e => { if (e.target === overlay) closeModal(); });
+
+      document.addEventListener('keydown', e => {
+        if (!overlay.classList.contains('on')) return;
+        if (e.key === 'Escape') closeModal();
+        if (view.hidden) return;
+        if (e.key === 'ArrowLeft') showPerson(current - 1);
+        if (e.key === 'ArrowRight') showPerson(current + 1);
+      });
+    }
+
+    /* ---------- Jalankan semuanya ---------- */
+    initSplash();
+    initFilter();
+    initUniform();
+    initScrollReveal();
+    initPersonModal();
+    initTeamModal();
+  </script>
+</body>
+</html>

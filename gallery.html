@@ -1,0 +1,621 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Galeri - XI PPLG 2</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<style>
+    /* ==============================
+       RESET
+       ============================== */
+    * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+    }
+
+    html,
+    body {
+        width: 100%;
+        min-height: 100%;
+    }
+
+    body {
+        font-family: "Plus Jakarta Sans", sans-serif;
+        background: #e2e8f0;
+        color: #1e293b;
+        min-height: 100vh;
+        padding-bottom: 50px;
+        overflow-x: hidden;
+    }
+
+    /* ==============================
+       NAVBAR
+       ============================== */
+    .nav {
+        width: 100%;
+        background: #0f172a;
+        color: #ffffff;
+        padding: 14px 20px;
+
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+
+        position: sticky;
+        top: 0;
+        z-index: 10;
+    }
+
+    .nav-title {
+        font-size: 0.95rem;
+        font-weight: 800;
+    }
+
+    .nav-btn {
+        width: 40px;
+        height: 40px;
+
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        border: 0;
+        border-radius: 10px;
+
+        background: #334155;
+        color: #ffffff;
+
+        text-decoration: none;
+        font-size: 0.9rem;
+
+        transition: 0.2s ease;
+    }
+
+    .nav-btn:hover {
+        background: #475569;
+    }
+
+    /* ==============================
+       HERO
+       ============================== */
+    .hero {
+        width: 100%;
+
+        background: linear-gradient(
+            135deg,
+            #334155,
+            #0f172a
+        );
+
+        color: #ffffff;
+        text-align: center;
+
+        padding: 48px 20px 78px;
+
+        border-bottom-left-radius: 30px;
+        border-bottom-right-radius: 30px;
+    }
+
+    .hero-icon {
+        width: 76px;
+        height: 76px;
+
+        margin: 0 auto 16px;
+
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        border: 2px solid rgba(255, 255, 255, 0.15);
+        border-radius: 50%;
+
+        background: #1e293b;
+
+        font-size: 30px;
+    }
+
+    .hero h1 {
+        margin-bottom: 8px;
+
+        font-size: 2rem;
+        font-weight: 800;
+    }
+
+    .hero p {
+        color: #cbd5e1;
+        font-size: 0.95rem;
+    }
+
+    /* ==============================
+       CONTAINER
+       ============================== */
+    .container {
+        width: 100%;
+        max-width: 950px;
+
+        margin: -40px auto 0;
+        padding: 0 15px;
+
+        position: relative;
+    }
+
+    /* ==============================
+       GALLERY CARD
+       ============================== */
+    .gallery-card {
+        width: 100%;
+
+        padding: 22px;
+
+        background: #ffffff;
+
+        border-radius: 22px;
+
+        box-shadow: 0 8px 25px rgba(0, 0, 0, 0.06);
+    }
+
+    .gallery-header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+
+        gap: 12px;
+
+        margin-bottom: 20px;
+        padding-bottom: 14px;
+
+        border-bottom: 1px solid #e2e8f0;
+    }
+
+    .gallery-title {
+        font-size: 1.2rem;
+        font-weight: 800;
+    }
+
+    .gallery-count {
+        color: #64748b;
+        font-size: 0.8rem;
+        white-space: nowrap;
+    }
+
+    /* ==============================
+       GALLERY GRID
+       ============================== */
+    .gallery-grid {
+        display: grid;
+
+        grid-template-columns: repeat(
+            3,
+            minmax(0, 1fr)
+        );
+
+        gap: 16px;
+    }
+
+    /* ==============================
+       PHOTO CARD
+       ============================== */
+    .photo-card {
+        min-width: 0;
+
+        overflow: hidden;
+
+        background: #f8fafc;
+
+        border: 1px solid #e2e8f0;
+        border-radius: 16px;
+
+        transition:
+            transform 0.2s ease,
+            box-shadow 0.2s ease;
+    }
+
+    .photo-card:hover {
+        transform: translateY(-3px);
+
+        box-shadow:
+            0 8px 18px rgba(15, 23, 42, 0.08);
+    }
+
+    .photo-box {
+        width: 100%;
+
+        aspect-ratio: 4 / 3;
+
+        overflow: hidden;
+
+        background: #cbd5e1;
+
+        cursor: pointer;
+    }
+
+    .photo-box img {
+        width: 100%;
+        height: 100%;
+
+        display: block;
+
+        object-fit: cover;
+
+        transition: transform 0.3s ease;
+    }
+
+    .photo-card:hover .photo-box img {
+        transform: scale(1.04);
+    }
+
+    .photo-info {
+        padding: 13px;
+    }
+
+    .photo-title {
+        margin-bottom: 5px;
+
+        font-size: 0.9rem;
+        font-weight: 800;
+    }
+
+    .photo-desc {
+        color: #64748b;
+
+        font-size: 0.75rem;
+        line-height: 1.4;
+    }
+
+    .photo-date {
+        margin-top: 8px;
+
+        color: #94a3b8;
+
+        font-size: 0.65rem;
+    }
+
+    /* ==============================
+       EMPTY STATE
+       ============================== */
+    .empty {
+        grid-column: 1 / -1;
+
+        padding: 55px 20px;
+
+        color: #94a3b8;
+
+        text-align: center;
+    }
+
+    /* ==============================
+       IMAGE VIEWER
+       ============================== */
+    .image-viewer {
+        position: fixed;
+        inset: 0;
+        z-index: 100;
+
+        display: none;
+        align-items: center;
+        justify-content: center;
+
+        padding: 20px;
+
+        background: rgba(0, 0, 0, 0.88);
+    }
+
+    .image-viewer img {
+        max-width: 95%;
+        max-height: 85vh;
+
+        border-radius: 12px;
+
+        object-fit: contain;
+    }
+
+    .close-viewer {
+        position: absolute;
+        top: 20px;
+        right: 20px;
+
+        width: 42px;
+        height: 42px;
+
+        border: 0;
+        border-radius: 50%;
+
+        background: #ffffff;
+        color: #0f172a;
+
+        font-size: 18px;
+
+        cursor: pointer;
+    }
+
+    /* ==============================
+       TABLET
+       ============================== */
+    @media (max-width: 800px) {
+        .gallery-grid {
+            grid-template-columns: repeat(
+                2,
+                minmax(0, 1fr)
+            );
+        }
+    }
+
+    /* ==============================
+       MOBILE
+       ============================== */
+    @media (max-width: 600px) {
+        .nav {
+            padding: 12px 15px;
+        }
+
+        .hero {
+            padding: 40px 15px 70px;
+
+            border-bottom-left-radius: 26px;
+            border-bottom-right-radius: 26px;
+        }
+
+        .hero-icon {
+            width: 68px;
+            height: 68px;
+
+            font-size: 27px;
+        }
+
+        .hero h1 {
+            font-size: 1.65rem;
+        }
+
+        .hero p {
+            font-size: 0.85rem;
+        }
+
+        .container {
+            margin-top: -32px;
+            padding: 0 12px;
+        }
+
+        .gallery-card {
+            padding: 15px;
+            border-radius: 18px;
+        }
+
+        .gallery-header {
+            margin-bottom: 15px;
+            padding-bottom: 12px;
+        }
+
+        .gallery-title {
+            font-size: 1rem;
+        }
+
+        .gallery-count {
+            font-size: 0.72rem;
+        }
+
+        .gallery-grid {
+            grid-template-columns: repeat(
+                2,
+                minmax(0, 1fr)
+            );
+
+            gap: 10px;
+        }
+
+        .photo-box {
+            aspect-ratio: 1 / 1;
+        }
+
+        .photo-info {
+            padding: 10px;
+        }
+
+        .photo-title {
+            font-size: 0.78rem;
+        }
+
+        .photo-desc {
+            font-size: 0.68rem;
+        }
+
+        .photo-date {
+            font-size: 0.6rem;
+        }
+    }
+</style>
+</head>
+<body>
+<nav class="nav">
+        <div class="nav-title">
+            <i class="fa-solid fa-images"></i>
+            Galeri XI PPLG 2
+        </div>
+
+        <a href="class.html" class="nav-btn">
+            <i class="fa-solid fa-house"></i>
+        </a>
+    </nav>
+<section class="hero">
+        <div class="hero-icon">
+            <i class="fa-solid fa-images"></i>
+        </div>
+
+        <h1>Galeri XI PPLG 2</h1>
+
+        <p>Kumpulan momen dan kenangan kelas</p>
+    </section>
+<main class="container">
+        <div class="gallery-card">
+            <div class="gallery-header">
+                <div class="gallery-title">
+                     Koleksi Foto
+                </div>
+
+                <div class="gallery-count" id="galleryCount">
+                    0 foto
+                </div>
+            </div>
+
+            <div
+                class="gallery-grid"
+                id="galleryGrid"
+            ></div>
+        </div>
+    </main>
+<div
+        class="image-viewer"
+        id="imageViewer"
+        onclick="closeViewer()"
+    >
+        <button
+            class="close-viewer"
+            onclick="event.stopPropagation(); closeViewer()"
+        >
+            <i class="fa-solid fa-xmark"></i>
+        </button>
+
+        <img
+            id="viewerImage"
+            src=""
+            alt="Foto besar"
+            onclick="event.stopPropagation()"
+        >
+    </div>
+
+    <script>
+    // ==========================================
+    // DATA FOTO
+    // ==========================================
+
+    const PHOTOS = [
+         {
+           gambar: "foto1.jpg",
+           judul: "Foto",
+           deskripsi: "Momen Sesudah Upacara XI PPLG 2",
+           tanggal: "2026"
+         },
+
+        // {
+        //     gambar: "foto2.jpg",
+        //     judul: "Kegiatan Kelas",
+        //     deskripsi: "XI PPLG 2",
+        //     tanggal: "2026"
+        // }
+    ];
+
+    // ==========================================
+    // ELEMENT
+    // ==========================================
+
+    const grid = document.getElementById("galleryGrid");
+    const count = document.getElementById("galleryCount");
+
+    // ==========================================
+    // JUMLAH FOTO
+    // ==========================================
+
+    count.textContent = `${PHOTOS.length} foto`;
+
+    // ==========================================
+    // TAMPILKAN FOTO
+    // ==========================================
+
+    if (PHOTOS.length === 0) {
+        grid.innerHTML = `
+            <div class="empty">
+                <i
+                    class="fa-regular fa-images"
+                    style="font-size: 40px; margin-bottom: 12px;"
+                ></i>
+
+                <div>Belum ada foto.</div>
+
+                <small>
+                    Tambahkan foto lewat array PHOTOS
+                    di dalam kode.
+                </small>
+            </div>
+        `;
+    } else {
+        grid.innerHTML = PHOTOS
+            .map((photo, index) => `
+                <article class="photo-card">
+                    <div
+                        class="photo-box"
+                        onclick="viewPhoto(${index})"
+                    >
+                        <img
+                            src="${escapeAttr(photo.gambar)}"
+                            alt="${escapeAttr(photo.judul)}"
+                            onerror="
+                                this.style.display = 'none';
+                                this.parentElement.style.background = '#94a3b8';
+                            "
+                        >
+                    </div>
+
+                    <div class="photo-info">
+                        <div class="photo-title">
+                            ${escapeHtml(photo.judul)}
+                        </div>
+
+                        <div class="photo-desc">
+                            ${escapeHtml(photo.deskripsi || "")}
+                        </div>
+
+                        <div class="photo-date">
+                            ${escapeHtml(photo.tanggal || "")}
+                        </div>
+                    </div>
+                </article>
+            `)
+            .join("");
+    }
+
+    // ==========================================
+    // KEAMANAN TEKS
+    // ==========================================
+
+    function escapeHtml(value) {
+        const element = document.createElement("div");
+
+        element.textContent = value ?? "";
+
+        return element.innerHTML;
+    }
+
+    function escapeAttr(value) {
+        return String(value ?? "")
+            .replace(/&/g, "&amp;")
+            .replace(/"/g, "&quot;")
+            .replace(/</g, "&lt;")
+            .replace(/>/g, "&gt;");
+    }
+
+    // ==========================================
+    // LIHAT FOTO BESAR
+    // ==========================================
+
+    function viewPhoto(index) {
+        const viewer = document.getElementById("imageViewer");
+        const image = document.getElementById("viewerImage");
+
+        image.src = PHOTOS[index].gambar;
+        viewer.style.display = "flex";
+    }
+
+    // ==========================================
+    // TUTUP FOTO BESAR
+    // ==========================================
+
+    function closeViewer() {
+        document.getElementById("imageViewer").style.display = "none";
+    }
+</script>
+</body>
+</html>
